@@ -1,28 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerRotate : MonoBehaviour
 {
-    [SerializeField] Transform capsule;
-    void Start()
-    {
-        
-    }
+    [SerializeField] Transform playerGraphics;
     void Update()
     {
-        Vector3 mousePosition = Input.mousePosition;       
+        Vector3 mousePosition = Input.mousePosition;
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-        if (Physics.Raycast(ray, out  RaycastHit hit, 100f))
+        Plane groundPlane = new Plane(Vector3.up, new Vector3(0, playerGraphics.position.y, 0));
+        if (groundPlane.Raycast(ray, out float distanceToPlane))
         {
-            Debug.Log("Hit: " + hit.collider.gameObject.name);
-            Debug.DrawLine(ray.origin, hit.point, Color.red);
-            
-            capsule.LookAt(new Vector3(hit.point.x, 1, hit.point.z));
-        }
-        else
-        {
-            Debug.Log("Raycast didn't hit anything.");
+                Vector3 rayEnd = ray.GetPoint(distanceToPlane);
+                Debug.DrawLine(ray.origin, rayEnd, Color.blue);
+                playerGraphics.LookAt(new Vector3(rayEnd.x, playerGraphics.position.y, rayEnd.z));
         }
     }
 }
