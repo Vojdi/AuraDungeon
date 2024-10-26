@@ -8,6 +8,16 @@ using UnityEngine.Rendering;
 public class PlayerRotate : MonoBehaviour
 {
     [SerializeField] Transform playerGraphics;
+    [SerializeField] Transform lrPos; //pozice odkud pujde liniRenderer
+    
+    LineRenderer lineRenderer;
+    PlayerStats playerStats;
+    private void Start()
+    {
+        playerStats = GetComponent<PlayerStats>();
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.positionCount = 2;
+    }
     void Update()
     {
         Vector3 mousePosition = Input.mousePosition;
@@ -17,7 +27,26 @@ public class PlayerRotate : MonoBehaviour
         {
                 Vector3 rayEnd = ray.GetPoint(distanceToPlane);
                 Debug.DrawLine(ray.origin, rayEnd, Color.blue);
-                playerGraphics.LookAt(new Vector3(rayEnd.x, playerGraphics.position.y, rayEnd.z));
+                Vector3 VisualMousePos = new Vector3(rayEnd.x, playerGraphics.position.y, rayEnd.z);
+                playerGraphics.LookAt(VisualMousePos);
+                ShowRange(VisualMousePos);
         }
+    }
+
+    void ShowRange(Vector3 VisualMousePos)
+    {
+        float distance = Vector3.Distance(transform.position, VisualMousePos);
+        Vector3 direction = (VisualMousePos - transform.position).normalized;
+        Vector3 endPosition;
+        if (distance <= playerStats.Range)
+        {
+            endPosition = VisualMousePos;
+        }
+        else
+        {
+            endPosition = transform.position + direction * playerStats.Range;
+        }
+        lineRenderer.SetPosition(0, lrPos.position);
+        lineRenderer.SetPosition(1, endPosition);
     }
 }
