@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 5f;  
+    PlayerStats playerStats;
+    static Vector3 playerPosition;
+    public static Vector3 PlayerPosition => playerPosition;
+    
+    private void Start()
+    {
+        playerStats = GetComponent<PlayerStats>();
+    }
     void Update()
     {
         float moveX = Input.GetAxis("Horizontal");
@@ -16,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
         right.y = 0f;
         
         Vector3 moveDirection = (right * moveX + forward * moveZ);
-        transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+        transform.Translate(moveDirection * playerStats.MovementSpeed * Time.deltaTime);
+        playerPosition = transform.position;
     }
 }
