@@ -15,7 +15,7 @@ public class PlayerStats : MonoBehaviour
     public float ProjectileSpeed => projectileSpeed;    
     void Start()
     {
-        range = 10f;
+        range = 12f;
         movementSpeed = 5f;
         reloadRate = 1f;
         projectileSpeed = 10f;

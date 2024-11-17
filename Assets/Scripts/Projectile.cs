@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<PlayerStats>() == null)
+        if (other.transform.root.gameObject.GetComponent<PlayerStats>() == null)
         {
             Destroy(gameObject);   
         }

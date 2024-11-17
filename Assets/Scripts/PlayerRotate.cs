@@ -57,6 +57,7 @@ public class PlayerRotate : MonoBehaviour
     Vector3 GetDirection(Vector3 VisualMousePos)
     {
         Vector3 direction = (VisualMousePos - transform.position).normalized;
+        direction.y = 0;
         lookDirection = direction;
         return direction;
     }
