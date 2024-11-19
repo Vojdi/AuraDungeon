@@ -13,8 +13,12 @@ public class PlayerStats : MonoBehaviour
 
     float projectileSpeed;
     public float ProjectileSpeed => projectileSpeed;    
+
+    private static PlayerStats instance;
+    public static PlayerStats Instance => instance;
     void Start()
     {
+        instance = this;
         range = 12f;
         movementSpeed = 5f;
         reloadRate = 1f;

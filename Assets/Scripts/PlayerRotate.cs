@@ -14,10 +14,10 @@ public class PlayerRotate : MonoBehaviour
     public static Vector3 LookDirection => lookDirection;
     
     LineRenderer lineRenderer;
-    PlayerStats playerStats;
+   
     private void Start()
     {
-        playerStats = GetComponent<PlayerStats>();
+        
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
     }
@@ -42,13 +42,14 @@ public class PlayerRotate : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, visualMousePos);
         Vector3 endPosition;
-        if (distance <= playerStats.Range)
+        if (distance <= PlayerStats.Instance.Range)
         {
             endPosition = visualMousePos;
         }
         else
         {
-            endPosition = transform.position + direction * playerStats.Range;
+            endPosition = transform.position + direction * PlayerStats.Instance.Range;
+            endPosition.y = lineRendererSpawnPosition.position.y;
         }
         lineRenderer.SetPosition(0, lineRendererSpawnPosition.position);
         lineRenderer.SetPosition(1, endPosition);

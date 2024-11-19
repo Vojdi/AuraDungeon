@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    PlayerStats playerStats;
     CharacterController characterController;
 
     static Vector3 playerPosition;
@@ -15,14 +14,14 @@ public class PlayerMovement : MonoBehaviour
     
     private void Start()
     {
-        playerStats = GetComponent<PlayerStats>();
+        
         characterController = GetComponent<CharacterController>();
     }
     void Update()
     {
         GetDirection();
         ApplyGravity();
-        characterController.Move(moveDirection * Time.deltaTime * playerStats.MovementSpeed);
+        characterController.Move(moveDirection * Time.deltaTime * PlayerStats.Instance.MovementSpeed);
         playerPosition = transform.position;
     }
 
