@@ -19,7 +19,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         instance = this;
-        range = 12f;
+        range = 20f;
         movementSpeed = 5f;
         reloadRate = 1f;
         projectileSpeed = 10f;

@@ -8,53 +8,61 @@ using UnityEngine.Rendering;
 public class PlayerRotate : MonoBehaviour
 {
     [SerializeField] Transform playerGraphics;
-    [SerializeField] Transform lineRendererSpawnPosition; //pozice odkud pujde liniRenderer
+    [SerializeField] Transform lineRendererSpawnObject; 
 
     static Vector3 lookDirection;
     public static Vector3 LookDirection => lookDirection;
-    
+
     LineRenderer lineRenderer;
-   
+
     private void Start()
     {
-        
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
     }
+
     void Update()
     {
         Vector3 mousePosition = Input.mousePosition;
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, new Vector3(0, playerGraphics.position.y, 0));
+        Plane groundPlane = new Plane(Vector3.up, new Vector3(0, lineRendererSpawnObject.position.y, 0));
         if (groundPlane.Raycast(ray, out float distanceToPlane))
         {
-                Vector3 rayEnd = ray.GetPoint(distanceToPlane);
-                Debug.DrawLine(ray.origin, rayEnd, Color.blue);
-                Vector3 visualMousePos = new Vector3(rayEnd.x, playerGraphics.position.y, rayEnd.z);
-                playerGraphics.LookAt(visualMousePos);
-                ShowRange(visualMousePos, GetDirection(visualMousePos));
+            Vector3 rayEnd = ray.GetPoint(distanceToPlane);
+            Debug.DrawLine(ray.origin, rayEnd, Color.blue);
+            Vector3 visualMousePos = new Vector3(rayEnd.x, playerGraphics.position.y, rayEnd.z);
+            playerGraphics.LookAt(visualMousePos);
+            ShowRange(visualMousePos);
         }
-       
-
     }
 
-    void ShowRange(Vector3 visualMousePos, Vector3 direction)
+    void ShowRange(Vector3 visualMousePos)
     {
-        float distance = Vector3.Distance(transform.position, visualMousePos);
+        Vector3 direction = GetDirection(visualMousePos);
         Vector3 endPosition;
-        if (distance <= PlayerStats.Instance.Range)
+        int layerMask = ~LayerMask.GetMask("Projectile");
+        if (Physics.Raycast(lineRendererSpawnObject.position, direction, out RaycastHit hit, PlayerStats.Instance.Range, layerMask))
         {
-            endPosition = visualMousePos;
+            endPosition = hit.point;
         }
         else
-        {
-            endPosition = transform.position + direction * PlayerStats.Instance.Range;
-            endPosition.y = lineRendererSpawnPosition.position.y;
+        { 
+            float distanceToMouse = Vector3.Distance(transform.position, visualMousePos);
+            if (distanceToMouse <= PlayerStats.Instance.Range)
+            {
+                endPosition = visualMousePos;
+            }
+            else
+            {
+                endPosition = transform.position + direction * PlayerStats.Instance.Range;
+            }
         }
-        lineRenderer.SetPosition(0, lineRendererSpawnPosition.position);
+        endPosition.y = lineRendererSpawnObject.position.y;
+        lineRenderer.SetPosition(0, lineRendererSpawnObject.position);
         lineRenderer.SetPosition(1, endPosition);
-        
     }
+
+
     Vector3 GetDirection(Vector3 VisualMousePos)
     {
         Vector3 direction = (VisualMousePos - transform.position).normalized;
