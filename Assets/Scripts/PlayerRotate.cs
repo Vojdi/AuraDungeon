@@ -40,32 +40,37 @@ public class PlayerRotate : MonoBehaviour
     {
         Vector3 direction = GetDirection(visualMousePos);
         Vector3 endPosition;
+        float distanceToMouse = Vector3.Distance(lineRendererSpawnObject.position, visualMousePos);
         int layerMask = ~LayerMask.GetMask("Projectile");
         if (Physics.Raycast(lineRendererSpawnObject.position, direction, out RaycastHit hit, PlayerStats.Instance.Range, layerMask))
         {
-            endPosition = hit.point;
+            if (distanceToMouse < hit.distance)
+            {
+                endPosition = visualMousePos;
+            }
+            else
+            {
+                endPosition = hit.point;
+            }
         }
         else
         { 
-            float distanceToMouse = Vector3.Distance(transform.position, visualMousePos);
             if (distanceToMouse <= PlayerStats.Instance.Range)
             {
                 endPosition = visualMousePos;
             }
             else
             {
-                endPosition = transform.position + direction * PlayerStats.Instance.Range;
+                endPosition = lineRendererSpawnObject.position + direction * PlayerStats.Instance.Range;
             }
         }
         endPosition.y = lineRendererSpawnObject.position.y;
         lineRenderer.SetPosition(0, lineRendererSpawnObject.position);
         lineRenderer.SetPosition(1, endPosition);
     }
-
-
     Vector3 GetDirection(Vector3 VisualMousePos)
     {
-        Vector3 direction = (VisualMousePos - transform.position).normalized;
+        Vector3 direction = (VisualMousePos - lineRendererSpawnObject.position).normalized;
         direction.y = 0;
         lookDirection = direction;
         return direction;
