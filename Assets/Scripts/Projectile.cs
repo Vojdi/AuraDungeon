@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
     }
     void Travel()
     {
-        transform.Translate(direction * Time.deltaTime * PlayerStats.Instance.ProjectileSpeed);
+        transform.Translate(direction * Time.deltaTime * PlayerStats.Instance.ProjectileSpeed, Space.World);
     }
     void CheckForDistanceTravelled()
     {

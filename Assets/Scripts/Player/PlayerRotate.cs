@@ -30,8 +30,8 @@ public class PlayerRotate : MonoBehaviour
         {
             Vector3 rayEnd = ray.GetPoint(distanceToPlane);
             Debug.DrawLine(ray.origin, rayEnd, Color.blue);
-            Vector3 visualMousePos = new Vector3(rayEnd.x, playerGraphics.position.y, rayEnd.z);
-            playerGraphics.LookAt(visualMousePos);
+            Vector3 visualMousePos = new Vector3(rayEnd.x,transform.position.y , rayEnd.z);
+            transform.LookAt(visualMousePos);
             ShowRange(visualMousePos);
         }
     }

@@ -1,12 +1,10 @@
-using System;
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] Material[] lineMaterials;
-    [SerializeField] Transform projectileSpawnLocation;
+    [SerializeField] Transform projectileSpawnTransform;
     [SerializeField] GameObject projectilePrefab;
     LineRenderer lineRenderer;
     bool reloaded;
@@ -27,8 +25,8 @@ public class PlayerAttack : MonoBehaviour
     void Attack()
     {
         if (reloaded) 
-        {
-            Instantiate(projectilePrefab, projectileSpawnLocation.position, transform.rotation);
+        {   
+            Instantiate(projectilePrefab, projectileSpawnTransform.position, projectileSpawnTransform.rotation);
             reloaded = false;
             StartCoroutine(Reload());
         }

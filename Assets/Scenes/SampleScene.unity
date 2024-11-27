@@ -629,6 +629,7 @@ GameObject:
   - component: {fileID: 357121523}
   - component: {fileID: 357121524}
   - component: {fileID: 357121525}
+  - component: {fileID: 357121526}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -813,7 +814,7 @@ MonoBehaviour:
   lineMaterials:
   - {fileID: 2100000, guid: 002dd8aca975b2246b9c14e2df54c12d, type: 2}
   - {fileID: 2100000, guid: b4e841485044fbd4a80a057ce61d8ceb, type: 2}
-  projectileSpawnLocation: {fileID: 91221089}
+  projectileSpawnTransform: {fileID: 91221089}
   projectilePrefab: {fileID: 4848920557667421863, guid: 099c21350c7f1004ea30ace4c8ef9e11,
     type: 3}
 --- !u!143 &357121525
@@ -841,6 +842,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &357121526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357121515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298187b7ea1713c49a36133438688c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  legs: {fileID: 1111668858}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,6 +1161,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1111668858 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9097066328815494515, guid: 2a628a0c3feab8844840aa9ffd4a9082,
+    type: 3}
+  m_PrefabInstance: {fileID: 14578008}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1659555586 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1434099760747128038, guid: 2a628a0c3feab8844840aa9ffd4a9082,
