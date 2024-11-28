@@ -7,11 +7,13 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] Transform projectileSpawnTransform;
     [SerializeField] GameObject projectilePrefab;
     LineRenderer lineRenderer;
+    PlayerAnimationStateController playerAnimationStateController;
     bool reloaded;
     void Start()
     {
         reloaded = true;
         lineRenderer = GetComponent<LineRenderer>();
+        playerAnimationStateController = GetComponent<PlayerAnimationStateController>();
     }
 
     // Update is called once per frame
@@ -19,10 +21,10 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetButton("Attack"))
         {
-            Attack();
+            playerAnimationStateController.InitiateAttack();
         }
     }
-    void Attack()
+    public void Attack()
     {
         if (reloaded) 
         {   
