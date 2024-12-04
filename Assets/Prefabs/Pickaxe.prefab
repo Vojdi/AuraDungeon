@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2790428510164838179}
   - component: {fileID: 7756370291384094258}
   - component: {fileID: 3943891366451456966}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8233869323264712207}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,8 +132,8 @@ GameObject:
   - component: {fileID: 1346643729379699461}
   - component: {fileID: 7640187485021514838}
   - component: {fileID: 8545397155092668573}
-  m_Layer: 0
-  m_Name: Projectile
+  m_Layer: 6
+  m_Name: Pickaxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 5455680272249218017}
   - component: {fileID: 6293246398624334121}
   - component: {fileID: 5948956264508951535}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 2152470693064691163}
   - component: {fileID: 5588659527760692262}
   - component: {fileID: 7428936429115968255}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 3053395048727900230}
   - component: {fileID: 6532152876184962343}
   - component: {fileID: 5706865496009071758}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

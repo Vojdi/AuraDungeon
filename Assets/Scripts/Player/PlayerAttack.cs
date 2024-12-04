@@ -19,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Attack"))
+        if (Input.GetButton("Attack") && reloaded)
         {
             playerAnimationStateController.InitiateAttack();
         }

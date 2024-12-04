@@ -8,8 +8,8 @@ public class PlayerStats : MonoBehaviour
     float movementSpeed;
     public float MovementSpeed => movementSpeed;
 
-    float reloadRate;
-    public float ReloadRate => reloadRate;
+    float reloadTime;
+    public float ReloadRate => reloadTime;
 
     float projectileSpeed;
     public float ProjectileSpeed => projectileSpeed;    
@@ -21,7 +21,7 @@ public class PlayerStats : MonoBehaviour
         instance = this;
         range = 15f;
         movementSpeed = 5f;
-        reloadRate = 1f;
-        projectileSpeed = 10f;
+        reloadTime = 1;
+        projectileSpeed = 20f;
     }
 }
