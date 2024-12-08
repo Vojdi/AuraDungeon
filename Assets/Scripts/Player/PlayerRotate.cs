@@ -7,20 +7,15 @@ using UnityEngine.Rendering;
 
 public class PlayerRotate : MonoBehaviour
 {
-    [SerializeField] Transform playerGraphics;
     [SerializeField] Transform lineRendererSpawnObject; 
-
     static Vector3 lookDirection;
     public static Vector3 LookDirection => lookDirection;
-
     LineRenderer lineRenderer;
-
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
     }
-
     void Update()
     {
         Vector3 mousePosition = Input.mousePosition;

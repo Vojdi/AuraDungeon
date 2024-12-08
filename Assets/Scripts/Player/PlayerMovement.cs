@@ -12,10 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     static bool isWalking;
     public static bool IsWalking => isWalking;
-
-    Vector3 moveDirection;
-
     
+    Vector3 moveDirection;
     private void Start()
     {
         characterController = GetComponent<CharacterController>();

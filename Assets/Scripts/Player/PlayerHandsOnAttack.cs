@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class HandsOnAttack : MonoBehaviour
+public class PlayerHandsOnAttack : MonoBehaviour
 {
     PlayerAttack playerAttack;
+
     Animator handsAnimator;
     private void Start()
     {

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    int maxHp;
+    public int MaxHp => maxHp;
     float range;
     public float Range => range;
 
@@ -19,6 +21,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         instance = this;
+        maxHp = 100;
         range = 15f;
         movementSpeed = 5f;
         reloadTime = 1;

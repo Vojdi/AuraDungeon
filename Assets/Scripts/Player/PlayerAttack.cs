@@ -4,10 +4,13 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] Material[] lineMaterials;
+
     [SerializeField] Transform projectileSpawnTransform;
     [SerializeField] GameObject projectilePrefab;
     LineRenderer lineRenderer;
+
     PlayerAnimationStateController playerAnimationStateController;
+
     bool reloaded;
     void Start()
     {
@@ -15,8 +18,6 @@ public class PlayerAttack : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         playerAnimationStateController = GetComponent<PlayerAnimationStateController>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButton("Attack") && reloaded)
