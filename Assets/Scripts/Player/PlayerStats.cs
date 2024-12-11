@@ -4,6 +4,10 @@ public class PlayerStats : MonoBehaviour
 {
     int maxHp;
     public int MaxHp => maxHp;
+
+    int damage;
+    public int Damage => damage; 
+
     float range;
     public float Range => range;
 
@@ -18,12 +22,13 @@ public class PlayerStats : MonoBehaviour
 
     private static PlayerStats instance;
     public static PlayerStats Instance => instance;
-    void Start()
+    void Awake()
     {
         instance = this;
         maxHp = 100;
-        range = 15f;
-        movementSpeed = 5f;
+        damage = 10;
+        range = 20f;
+        movementSpeed = 10f;
         reloadTime = 1;
         projectileSpeed = 20f;
     }

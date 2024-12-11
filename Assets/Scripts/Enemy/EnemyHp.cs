@@ -1,20 +1,17 @@
 using UnityEngine;
 
-public class PlayerHp : Hp
+public class EnemyHp : Hp
 {
+    
     override protected void Awake()
     {
-        MaxHealth = PlayerStats.Instance.MaxHp;
+        MaxHealth = 40;//temporary
         base.Awake();
     }
+
+    
     override protected void Die()
     {
-        Debug.Log("U Died");
-        //dodelat
+        Destroy(gameObject);
     }
-
-
-
-
-
 }

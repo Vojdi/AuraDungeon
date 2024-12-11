@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] Transform endProjectileTransform;
     Vector3 direction;
     Vector3 startPlayerPos;
     float distanceTravelled;
@@ -22,7 +23,7 @@ public class Projectile : MonoBehaviour
     }
     void CheckForDistanceTravelled()
     {
-        distanceTravelled = Vector3.Distance(transform.position, startPlayerPos);
+        distanceTravelled = Vector3.Distance(endProjectileTransform.position, startPlayerPos);
         if (distanceTravelled >= PlayerStats.Instance.Range)
         {
             Destroy(gameObject);
@@ -30,9 +31,16 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.root.gameObject.GetComponent<PlayerStats>() == null)
+        GameObject collision = other.transform.root.gameObject;
+        if (collision.GetComponent<PlayerStats>() == null)
         {
+            EnemyHp enemyHp = collision.GetComponent<EnemyHp>();
+            if (enemyHp != null)
+            {
+                enemyHp.DoDmg(PlayerStats.Instance.Damage);
+            }
             Destroy(gameObject);   
         }
+        
     }
 }

@@ -2,14 +2,15 @@ using UnityEngine;
 
 public abstract class Hp : MonoBehaviour
 {
-    protected int health;
+    private int health;
     public int Health => health;
-    protected int maxHealth;
+    public int MaxHealth;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
-        health = maxHealth;
+        health = MaxHealth;
     }
+    
     public void DoDmg(int Dmg)
     {
         health -= Dmg;
