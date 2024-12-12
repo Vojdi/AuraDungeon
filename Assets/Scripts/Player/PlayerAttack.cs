@@ -22,9 +22,17 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetButton("Attack") && reloaded)
         {
+            lineRenderer.material = lineMaterials[1];
             playerAnimationStateController.InitiateAttack();
         }
-        
+        else if(Input.GetButton("Attack"))
+        {
+            lineRenderer.material = lineMaterials[1];
+        }
+        else
+        {
+            lineRenderer.material = lineMaterials[0];
+        }
     }
     public void Attack()
     {
@@ -36,10 +44,7 @@ public class PlayerAttack : MonoBehaviour
     }
     public void Reload()
     {
-        lineRenderer.material = lineMaterials[0];
         reloaded = true;
     }
-    public void StartAttack() {
-        lineRenderer.material = lineMaterials[1];
-    }
+    
 }
