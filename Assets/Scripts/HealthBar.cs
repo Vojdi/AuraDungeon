@@ -7,7 +7,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] Slider hBSlider;
     [SerializeField] Slider eHBSlider;
     Hp hp;
-    float lerpSpeed = 0.02f;
+    float lerpSpeed = 0.04f;
     
     private void Start()
     {
@@ -15,7 +15,6 @@ public class HealthBar : MonoBehaviour
         hBSlider.maxValue = hp.MaxHealth;
         eHBSlider.maxValue = hp.MaxHealth;
         hBSlider.value = hp.Health;
-        Debug.Log(hBSlider.fillRect);
     }
     private void Update()
     {

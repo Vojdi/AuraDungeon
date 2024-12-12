@@ -29,7 +29,7 @@ public class PlayerStats : MonoBehaviour
         damage = 10;
         range = 20f;
         movementSpeed = 10f;
-        reloadTime = 1;
+        reloadTime = 0.5f;
         projectileSpeed = 20f;
     }
 }

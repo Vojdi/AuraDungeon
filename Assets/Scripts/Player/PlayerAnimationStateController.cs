@@ -13,6 +13,7 @@ public class PlayerAnimationStateController : MonoBehaviour
     }
     void Update()
     {
+        ApplyMovementSpeedMultiplier();
         if (PlayerMovement.IsWalking)
         {
             legsAnimator.SetBool("IsWalking", true);
@@ -26,6 +27,22 @@ public class PlayerAnimationStateController : MonoBehaviour
     }
     public void InitiateAttack()
     {
+        ApplyAttackSpeedMultiplier();
         handsAnimator.SetBool("IsAttacking", true);
     }
+    private void ApplyMovementSpeedMultiplier()
+    {
+        if (handsAnimator.GetFloat("MovementSpeedMultiplier") != PlayerStats.Instance.MovementSpeed * 5)
+        {
+            handsAnimator.SetFloat("MovementSpeedMultiplier", PlayerStats.Instance.MovementSpeed / 5);
+            legsAnimator.SetFloat("MovementSpeedMultiplier", PlayerStats.Instance.MovementSpeed / 5);
+        }
+    }
+    private void ApplyAttackSpeedMultiplier()
+    {
+        handsAnimator.SetFloat("AttackSpeedMultiplier", 1 / PlayerStats.Instance.ReloadRate);
+    }
+
+    
+
 }

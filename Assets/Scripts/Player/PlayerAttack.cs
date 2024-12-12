@@ -14,9 +14,9 @@ public class PlayerAttack : MonoBehaviour
     bool reloaded;
     void Start()
     {
-        reloaded = true;
         lineRenderer = GetComponent<LineRenderer>();
         playerAnimationStateController = GetComponent<PlayerAnimationStateController>();
+        reloaded = true;
     }
     void Update()
     {
@@ -24,21 +24,22 @@ public class PlayerAttack : MonoBehaviour
         {
             playerAnimationStateController.InitiateAttack();
         }
+        
     }
     public void Attack()
     {
         if (reloaded) 
-        {   
+        {
             Instantiate(projectilePrefab, projectileSpawnTransform.position, projectileSpawnTransform.rotation);
             reloaded = false;
-            StartCoroutine(Reload());
         }
     }
-    IEnumerator Reload()
+    public void Reload()
     {
-        lineRenderer.material = lineMaterials[1];
-        yield return new WaitForSeconds(PlayerStats.Instance.ReloadRate);
-        reloaded = true;
         lineRenderer.material = lineMaterials[0];
+        reloaded = true;
+    }
+    public void StartAttack() {
+        lineRenderer.material = lineMaterials[1];
     }
 }
