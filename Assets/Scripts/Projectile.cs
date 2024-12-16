@@ -6,16 +6,23 @@ public class Projectile : MonoBehaviour
     Vector3 direction;
     Vector3 startPlayerPos;
     float distanceTravelled;
-    void Start()
+    bool readyToTravel = false;
+    
+    
+    void Update()
     {
+        if (readyToTravel)
+        {
+            Travel();
+            CheckForDistanceTravelled();
+        }
+    }
+    public void Cast()
+    {    
         direction = PlayerRotate.LookDirection;
         startPlayerPos = PlayerMovement.PlayerPosition;
         distanceTravelled = 0f;
-    }
-    void Update()
-    {
-        Travel();
-        CheckForDistanceTravelled();
+        readyToTravel = true;
     }
     void Travel()
     {
@@ -26,7 +33,7 @@ public class Projectile : MonoBehaviour
         distanceTravelled = Vector3.Distance(endProjectileTransform.position, startPlayerPos);
         if (distanceTravelled >= PlayerStats.Instance.Range)
         {
-            Destroy(gameObject);
+            AddToPool();
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -39,8 +46,12 @@ public class Projectile : MonoBehaviour
             {
                 enemyHp.DoDmg(PlayerStats.Instance.Damage);
             }
-            Destroy(gameObject);   
+            AddToPool();
         }
-        
+    }
+    void AddToPool()
+    {
+        PlayerAttack.PlayerObjPool.projectiles.Add(this);
+        this.gameObject.SetActive(false);
     }
 }

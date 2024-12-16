@@ -4,10 +4,11 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] Material[] lineMaterials;
-
     [SerializeField] Transform projectileSpawnTransform;
-    [SerializeField] GameObject projectilePrefab;
+    [SerializeField] GameObject projectilePrefab;   
+    public GameObject ProjectilePrefab => projectilePrefab;
     LineRenderer lineRenderer;
+    public static ObjectPool PlayerObjPool;
 
     PlayerAnimationStateController playerAnimationStateController;
 
@@ -17,6 +18,7 @@ public class PlayerAttack : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         playerAnimationStateController = GetComponent<PlayerAnimationStateController>();
         reloaded = true;
+        PlayerObjPool = GetComponent<ObjectPool>();
     }
     void Update()
     {
@@ -38,7 +40,13 @@ public class PlayerAttack : MonoBehaviour
     {
         if (reloaded) 
         {
-            Instantiate(projectilePrefab, projectileSpawnTransform.position, projectileSpawnTransform.rotation);
+
+            Projectile projectile = PlayerObjPool.projectiles[0];
+            PlayerObjPool.projectiles.Remove(PlayerObjPool.projectiles[0]);
+            projectile.gameObject.SetActive(true);
+            projectile.transform.position = projectileSpawnTransform.position;
+            projectile.transform.rotation = projectileSpawnTransform.rotation;
+            projectile.Cast();
             reloaded = false;
         }
     }
