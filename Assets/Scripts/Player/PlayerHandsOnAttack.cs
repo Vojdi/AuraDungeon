@@ -9,7 +9,6 @@ public class PlayerHandsOnAttack : MonoBehaviour
         playerAttack = transform.root.gameObject.GetComponent<PlayerAttack>();
         handsAnimator = GetComponent<Animator>();
     }
-    
     void OnAnimationAttack()
     {
         playerAttack.Attack();

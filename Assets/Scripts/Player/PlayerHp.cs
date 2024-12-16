@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerHp : Hp
 {
-    override protected void Awake()
+    
+    override protected void Start()
     {
         MaxHealth = PlayerStats.Instance.MaxHp;
-        base.Awake();
+        base.Start();
     }
     override protected void Die()
     {

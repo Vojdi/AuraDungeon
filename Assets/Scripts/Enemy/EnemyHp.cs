@@ -3,10 +3,10 @@ using UnityEngine;
 public class EnemyHp : Hp
 {
     
-    override protected void Awake()
+    override protected void Start()
     {
         MaxHealth = 40;//temporary
-        base.Awake();
+        base.Start();
     }
 
     

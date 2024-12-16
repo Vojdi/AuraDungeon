@@ -45,6 +45,5 @@ public class PlayerAttack : MonoBehaviour
     public void Reload()
     {
         reloaded = true;
-    }
-    
+    } 
 }
