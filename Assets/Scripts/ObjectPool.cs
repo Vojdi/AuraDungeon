@@ -8,10 +8,11 @@ public class ObjectPool : MonoBehaviour
     public List<Projectile> projectiles = new List<Projectile>();  
     private void Start()
     {
-        for (int i = 0; i < 20; i++) { 
-            var projectile = Instantiate(GetComponent<PlayerAttack>().ProjectilePrefab).GetComponent<Projectile>();
-            projectiles.Add(projectile);
-            projectile.gameObject.SetActive(false);
+        var projectile = GetComponent<PlayerAttack>().ProjectilePrefab.GetComponent<Projectile>();
+        for (int i = 0; i < 7; i++) {
+            var prj = Instantiate(projectile, Waste.Instance.transform);
+            projectiles.Add(prj);
+            prj.gameObject.SetActive(false);
         }
     }
     

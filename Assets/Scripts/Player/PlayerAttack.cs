@@ -40,7 +40,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if (reloaded) 
         {
-
             Projectile projectile = PlayerObjPool.projectiles[0];
             PlayerObjPool.projectiles.Remove(PlayerObjPool.projectiles[0]);
             projectile.gameObject.SetActive(true);
