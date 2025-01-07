@@ -6,9 +6,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField] GameObject healthBarGraphics;
     [SerializeField] Slider hBSlider;
     [SerializeField] Slider eHBSlider;
-   
     Hp hp;
-    float lerpSpeed = 0.04f;
+    float lerpSpeed = 0.1f;
     
     private void Start()
     {
