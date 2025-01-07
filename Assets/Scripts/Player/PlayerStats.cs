@@ -18,7 +18,10 @@ public class PlayerStats : MonoBehaviour
     public float ReloadRate => reloadTime;
 
     float projectileSpeed;
-    public float ProjectileSpeed => projectileSpeed;    
+    public float ProjectileSpeed => projectileSpeed;
+
+    int aura;
+    public int Aura => aura;    
 
     private static PlayerStats instance;
     public static PlayerStats Instance => instance;
@@ -31,5 +34,6 @@ public class PlayerStats : MonoBehaviour
         movementSpeed = 10f;
         reloadTime = 1f;
         projectileSpeed = 20f;
+        aura = 0;
     }
 }

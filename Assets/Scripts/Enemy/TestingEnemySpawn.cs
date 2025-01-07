@@ -12,12 +12,11 @@ public class TestingEnemySpawn : MonoBehaviour
     }
     void Update()
     {
-        if(time % 2000 == 0)
+        if(time % 3000 == 0)
         {
             var en = Instantiate(enemy, new Vector3(Random.Range(0,10),0,Random.Range(0,10)), Quaternion.identity);
-            en.GetComponent<NavMeshAgent>().SetDestination(PlayerMovement.PlayerPosition);
         }
         time++;
-        Debug.Log(time);
+       
     }
 }
