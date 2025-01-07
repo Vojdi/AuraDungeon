@@ -8,7 +8,6 @@ public class HealthBar : MonoBehaviour
     [SerializeField] Slider eHBSlider;
     Hp hp;
     float lerpSpeed = 0.1f;
-    
     private void Start()
     {
         hp = transform.root.GetComponent<Hp>();

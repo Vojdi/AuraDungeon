@@ -3,24 +3,32 @@ using UnityEngine.AI;
 
 public class MeleeAI : MonoBehaviour
 {
+    EnemyHp ehp;
     NavMeshAgent agent;
     int sightRange;
     int auraToughness;
     float idleMovementOpportunity = 0;
     bool isWalking = false;
+    bool isTriggered = false;
     public bool IsWalking => isWalking;
     
     void Start()
     {
+        ehp = GetComponent<EnemyHp>();
         agent = GetComponent<NavMeshAgent>();
-        sightRange = 15;//dokud nejsou EnemyStats
+        sightRange = 15;//dokud nejsou EnemyStats, scalovat Animace se stats
         auraToughness = 5;//---------------------
     }
     void Update()
     {
+        if(ehp.MaxHealth != ehp.Health)
+        {
+            isTriggered = true;
+        }
         if(auraToughness > PlayerStats.Instance.Aura)
         {
-            if (Vector3.Distance(PlayerMovement.PlayerPosition, transform.position) < sightRange)
+
+            if (Vector3.Distance(PlayerMovement.PlayerPosition, transform.position) < sightRange || isTriggered)
             {
                 agent.SetDestination(PlayerMovement.PlayerPosition);
                 isWalking = true;
@@ -39,6 +47,10 @@ public class MeleeAI : MonoBehaviour
                     Prochazky();
                 }
             }
+        }
+        else
+        {
+            //dodelat zdrhani enemy
         }
     }
     void Prochazky()

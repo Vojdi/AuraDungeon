@@ -15,5 +15,4 @@ public class ObjectPool : MonoBehaviour
             prj.gameObject.SetActive(false);
         }
     }
-    
 }

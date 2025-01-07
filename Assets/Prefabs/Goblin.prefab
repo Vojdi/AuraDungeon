@@ -205,8 +205,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 3.6495004, z: 1}
-  m_Center: {x: 0, y: 1.8027227, z: 0}
+  m_Size: {x: 2.1152318, y: 3.6495004, z: 1}
+  m_Center: {x: -0.015903592, y: 1.8027227, z: 0}
 --- !u!114 &4921487012510942934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc9c211ac3050ea43a960a3020fccd1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsWalking: 0
 --- !u!114 &8101020487095230762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   legs: {fileID: 2693798598719022609}
+  hands: {fileID: 3723879470959597826}
 --- !u!1 &4506578657507671365
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,6 +872,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7249681765021773227}
+    - targetCorrespondingSourceObject: {fileID: 7561806055975148128, guid: a4458f7fcadd25e488d4336864525e44,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8307627084093792090}
   m_SourcePrefab: {fileID: 100100000, guid: a4458f7fcadd25e488d4336864525e44, type: 3}
 --- !u!1 &2693798598719022609 stripped
 GameObject:
@@ -890,6 +894,34 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 8fc4a424b89fe1d47b48d17c77040ae7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &3723879470959597826 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7561806055975148128, guid: a4458f7fcadd25e488d4336864525e44,
+    type: 3}
+  m_PrefabInstance: {fileID: 6583433817495782242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8307627084093792090
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3723879470959597826}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 19cb7d5010ec0fb43a0ea73619e4e5e8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -32,17 +32,14 @@ public class PlayerAnimationStateController : MonoBehaviour
     }
     private void ApplyMovementSpeedMultiplier()
     {
-        if (handsAnimator.GetFloat("MovementSpeedMultiplier") != PlayerStats.Instance.MovementSpeed * 7)
+        if (handsAnimator.GetFloat("MovementSpeedMultiplier") != PlayerStats.Instance.MovementSpeed * 9)
         {
-            handsAnimator.SetFloat("MovementSpeedMultiplier", PlayerStats.Instance.MovementSpeed / 7);
-            legsAnimator.SetFloat("MovementSpeedMultiplier", PlayerStats.Instance.MovementSpeed / 7);
+            handsAnimator.SetFloat("MovementSpeedMultiplier", PlayerStats.Instance.MovementSpeed / 9);
+            legsAnimator.SetFloat("MovementSpeedMultiplier", PlayerStats.Instance.MovementSpeed / 9);
         }
     }
     private void ApplyAttackSpeedMultiplier()
     {
         handsAnimator.SetFloat("AttackSpeedMultiplier", 1 / PlayerStats.Instance.ReloadRate);
     }
-
-    
-
 }
