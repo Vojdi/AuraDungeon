@@ -1,3 +1,5 @@
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -31,9 +33,14 @@ public class PlayerStats : MonoBehaviour
         maxHp = 100;
         damage = 10;
         range = 20f;
-        movementSpeed = 10f;
+        movementSpeed = 7f;
         reloadTime = 1f;
         projectileSpeed = 20f;
-        aura = 0;
+        aura = 10;
     }
+    public static void ChangeAura(int value)
+    {
+        Instance.aura = value;
+    }
+
 }

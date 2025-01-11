@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MeleeEnemyAnimationStateController : MonoBehaviour
@@ -7,14 +8,18 @@ public class MeleeEnemyAnimationStateController : MonoBehaviour
     Animator legsAnimator;
     Animator handsAnimator;
     MeleeAI mai;
+    EnemyStats es;
     void Start()
     {
         legsAnimator = legs.GetComponent<Animator>();
         handsAnimator = hands.GetComponent<Animator>();
         mai = GetComponent<MeleeAI>();
+        es = GetComponent<EnemyStats>();
     }
     void Update()
     {
+
+        ApplyMovementSpeedMultiplier();
         if (mai.IsWalking)
         {
             legsAnimator.SetBool("IsWalking", true);
@@ -25,6 +30,29 @@ public class MeleeEnemyAnimationStateController : MonoBehaviour
         {
             legsAnimator.SetBool("IsWalking", false);
             handsAnimator.SetBool("IsWalking", false);
+        }
+        ApplyAttackSpeedMultiplier();
+        if (mai.IsAttacking)
+        {
+            handsAnimator.SetBool("IsAttacking", true);
+        }
+        else
+        {
+            handsAnimator.SetBool("IsAttacking", false);
+        }
+    }
+
+    void ApplyAttackSpeedMultiplier()
+    {
+        handsAnimator.SetFloat("AttackSpeedMultiplier", 1 / es.ReloadTime);
+    }
+
+    void ApplyMovementSpeedMultiplier()
+    {
+        if (handsAnimator.GetFloat("MovementSpeedMultiplier") != es.MovementSpeed * 5)
+        {
+            handsAnimator.SetFloat("MovementSpeedMultiplier", es.MovementSpeed / 5);
+            legsAnimator.SetFloat("MovementSpeedMultiplier", es.MovementSpeed / 5);
         }
     }
 }

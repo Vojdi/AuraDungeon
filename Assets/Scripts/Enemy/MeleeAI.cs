@@ -1,63 +1,139 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MeleeAI : MonoBehaviour
 {
+    EnemyStats es;
     EnemyHp ehp;
     NavMeshAgent agent;
+
     int sightRange;
     int auraToughness;
+
     float idleMovementOpportunity = 0;
-    bool isWalking = false;
     bool isTriggered = false;
-    public bool IsWalking => isWalking;
     
+    bool lockedFleeState = false;
+    float fleeSpeedMultiplier = 2f;
+    bool isWalking = false;
+    public bool IsWalking => isWalking;
+
+    bool isAttacking = false;
+    public bool IsAttacking => isAttacking;
+
     void Start()
     {
         ehp = GetComponent<EnemyHp>();
+        es = GetComponent<EnemyStats>();
         agent = GetComponent<NavMeshAgent>();
-        sightRange = 15;//dokud nejsou EnemyStats, scalovat Animace se stats
-        auraToughness = 5;//---------------------
     }
     void Update()
     {
-        if(ehp.MaxHealth != ehp.Health)
+        
+        if (ehp.MaxHealth != ehp.Health)
         {
             isTriggered = true;
         }
-        if(auraToughness > PlayerStats.Instance.Aura)
+        if (lockedFleeState && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
+            lockedFleeState = false;
+            agent.speed /= fleeSpeedMultiplier;
+        }
+        else if (lockedFleeState)
+        {
+            return;
+        }
+        agent.speed = es.MovementSpeed;
+        float enemyPlayerDistance = Vector3.Distance(PlayerMovement.PlayerPosition, transform.position);
+        if (enemyPlayerDistance < es.SightRange || isTriggered)
+        {
+            agent.autoBraking = false;
+            if (es.AuraToughness > PlayerStats.Instance.Aura)
+            {//Enemy Followuje Hrace
+                if(enemyPlayerDistance <= es.Reach)
+                {
+                    isAttacking = true;
+                    isWalking = false;
+                    agent.ResetPath();
 
-            if (Vector3.Distance(PlayerMovement.PlayerPosition, transform.position) < sightRange || isTriggered)
-            {
-                agent.SetDestination(PlayerMovement.PlayerPosition);
-                isWalking = true;
+                }
+                else
+                {
+                    agent.SetDestination(PlayerMovement.PlayerPosition);
+                    SetWalkingTrue();
+                }
+                
             }
             else
-            {
-                
-                if(!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {//Enemy zdrha
+                Vector3 directionFromPlayer = (transform.position - PlayerMovement.PlayerPosition).normalized;
+                Vector3 fleePosition = transform.position + directionFromPlayer * 2;
+                if (!NavMesh.SamplePosition(fleePosition, out NavMeshHit hit, 1, NavMesh.AllAreas))
                 {
-                    isWalking = false;
-                    idleMovementOpportunity += Time.deltaTime * 1;
+                    Vector3 newFleePosition = GetNewFleePosition();
+                    agent.SetDestination(newFleePosition + transform.position);
+                    lockedFleeState = true;
+                    agent.speed *= fleeSpeedMultiplier;
                 }
-                if(idleMovementOpportunity > 1f)
+                else
                 {
-                    idleMovementOpportunity = 0;
-                    Prochazky();
+                    agent.SetDestination((transform.position + directionFromPlayer * 2));
                 }
+                SetWalkingTrue();
             }
         }
-        else
+        else //Prochazky
         {
-            //dodelat zdrhani enemy
+            agent.autoBraking = true;
+            if (!agent.pathPending &&!agent.hasPath && !(agent.remainingDistance > agent.stoppingDistance))
+            {
+                isWalking = false;
+                idleMovementOpportunity += Time.deltaTime * 1;
+            }
+            if (idleMovementOpportunity > 1f)
+            {
+                Prochazky();
+            }
         }
+
+
     }
+
+    Vector3 GetNewFleePosition()
+    {
+        int distance = Random.Range(11, 14);
+        int[] possibleMoveValues = new int[] { distance, distance + 2, distance - 2 };
+        Vector3 NewFleePosition = (Vector3.zero - transform.position).normalized * possibleMoveValues[Random.Range(0, 3)];
+        return NewFleePosition;
+    }
+
     void Prochazky()
     {
-        int distance = Random.Range(3,6);
-        int[] possibleValues = new int[] { distance,-distance,0,2*distance,-2*distance};
-        agent.SetDestination(transform.position + new Vector3(possibleValues[Random.Range(0,5)], 0, possibleValues[Random.Range(0, 5)]));
-        isWalking = true;
+        int distance = Random.Range(3, 6);
+        int[] possibleMoveValues = new int[] { distance, -distance, 0, 2 * distance, -2 * distance };
+        Vector3 randomDistance = new Vector3(possibleMoveValues[Random.Range(0, 5)], 0, possibleMoveValues[Random.Range(0, 5)]);
+        if(randomDistance == Vector3.zero)
+        {
+            return;
+        }
+        Vector3 desiredPosition = transform.position + randomDistance;
+        if (NavMesh.SamplePosition(desiredPosition, out NavMeshHit hit, 1, NavMesh.AllAreas))
+        {
+            Vector3 validPosition = hit.position;
+            agent.SetDestination(validPosition);
+            SetWalkingTrue();
+        }
     }
+    void SetWalkingTrue()
+    {
+        isWalking = true;
+        idleMovementOpportunity = 0;
+    }
+    public void StopAttacking()
+    {
+        isAttacking = false;
+    }
+
+
 }

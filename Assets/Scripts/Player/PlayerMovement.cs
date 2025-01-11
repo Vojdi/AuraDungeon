@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float gravity = -9.81f;
         float velocity;
-        float gravityMultiplier = 5;
+        float gravityMultiplier = 20;
 
         velocity = gravity * gravityMultiplier * Time.deltaTime;
 
