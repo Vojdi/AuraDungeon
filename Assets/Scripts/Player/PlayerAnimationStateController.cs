@@ -13,9 +13,9 @@ public class PlayerAnimationStateController : MonoBehaviour
     }
     void Update()
     {
-        ApplyMovementSpeedMultiplier();
         if (PlayerMovement.IsWalking)
         {
+            ApplyMovementSpeedMultiplier();
             legsAnimator.SetBool("IsWalking", true);
             handsAnimator.SetBool("IsWalking", true);
         }
@@ -42,4 +42,5 @@ public class PlayerAnimationStateController : MonoBehaviour
     {
         handsAnimator.SetFloat("AttackSpeedMultiplier", 1 / PlayerStats.Instance.ReloadRate);
     }
+   
 }

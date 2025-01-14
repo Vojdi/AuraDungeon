@@ -6,6 +6,7 @@ public class MeleeAI : MonoBehaviour
 {
     EnemyStats es;
     EnemyHp ehp;
+    AnimationStateController asc;
     NavMeshAgent agent;
 
     int sightRange;
@@ -26,11 +27,11 @@ public class MeleeAI : MonoBehaviour
     {
         ehp = GetComponent<EnemyHp>();
         es = GetComponent<EnemyStats>();
+        asc = GetComponent<AnimationStateController>();
         agent = GetComponent<NavMeshAgent>();
     }
     void Update()
     {
-        
         if (ehp.MaxHealth != ehp.Health)
         {
             isTriggered = true;
@@ -56,14 +57,12 @@ public class MeleeAI : MonoBehaviour
                     isAttacking = true;
                     isWalking = false;
                     agent.ResetPath();
-
                 }
                 else
                 {
                     agent.SetDestination(PlayerMovement.PlayerPosition);
                     SetWalkingTrue();
-                }
-                
+                }     
             }
             else
             {//Enemy zdrha
@@ -96,8 +95,6 @@ public class MeleeAI : MonoBehaviour
                 Prochazky();
             }
         }
-
-
     }
 
     Vector3 GetNewFleePosition()
@@ -107,7 +104,6 @@ public class MeleeAI : MonoBehaviour
         Vector3 NewFleePosition = (Vector3.zero - transform.position).normalized * possibleMoveValues[Random.Range(0, 3)];
         return NewFleePosition;
     }
-
     void Prochazky()
     {
         int distance = Random.Range(3, 6);
@@ -134,6 +130,4 @@ public class MeleeAI : MonoBehaviour
     {
         isAttacking = false;
     }
-
-
 }
