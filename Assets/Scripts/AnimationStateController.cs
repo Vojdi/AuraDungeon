@@ -15,13 +15,6 @@ public class AnimationStateController : MonoBehaviour
         legsAnimator = legs.GetComponent<Animator>();
         handsAnimator = hands.GetComponent<Animator>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-   
     protected virtual void RefreshValues()
     {
 
@@ -54,5 +47,4 @@ public class AnimationStateController : MonoBehaviour
         ApplyAttackSpeedMultiplier();
         handsAnimator.SetBool("IsAttacking", true);
     }
-
 }

@@ -17,7 +17,7 @@ public class PlayerStats : MonoBehaviour
     public float MovementSpeed => movementSpeed;
 
     float reloadTime;
-    public float ReloadRate => reloadTime;
+    public float ReloadTime => reloadTime;
 
     float projectileSpeed;
     public float ProjectileSpeed => projectileSpeed;

@@ -3,6 +3,12 @@ using UnityEngine;
 public class OnEnemyHandsAttack : MonoBehaviour
 {
     [SerializeField] Collider col;
+    Animator handsAnimator;
+
+    private void Start()
+    {
+        handsAnimator = GetComponent<Animator>();
+    }
     void EnableCollider()
     {
         col.enabled = true;
@@ -14,12 +20,16 @@ public class OnEnemyHandsAttack : MonoBehaviour
         {
            
             php.DoDmg(transform.root.gameObject.GetComponent<EnemyStats>().Damage);
-            col.enabled = false;
+            EndAttack();
         }
     }
     void EndAttack()
     {
         col.enabled = false;
-        transform.root.gameObject.GetComponent<MeleeAI>().StopAttacking();
+        
+    }
+    void EndAnimation()
+    {
+        handsAnimator.SetBool("IsAttacking", false);
     }
 }

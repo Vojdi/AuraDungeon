@@ -1,58 +1,32 @@
 using System;
 using UnityEngine;
 
-public class MeleeEnemyAnimationStateController : MonoBehaviour
+public class MeleeEnemyAnimationStateController : AnimationStateController
 {
-    [SerializeField] GameObject legs;
-    [SerializeField] GameObject hands;
-    Animator legsAnimator;
-    Animator handsAnimator;
     MeleeAI mai;
     EnemyStats es;
-    void Start()
+    override protected void Start()
     {
-        legsAnimator = legs.GetComponent<Animator>();
-        handsAnimator = hands.GetComponent<Animator>();
+        base.Start();
         mai = GetComponent<MeleeAI>();
         es = GetComponent<EnemyStats>();
     }
     void Update()
     {
-
-        ApplyMovementSpeedMultiplier();
+        RefreshValues();
         if (mai.IsWalking)
         {
-            legsAnimator.SetBool("IsWalking", true);
-            handsAnimator.SetBool("IsWalking", true);
+            MovementIsWalking();
 
         }
         else
         {
-            legsAnimator.SetBool("IsWalking", false);
-            handsAnimator.SetBool("IsWalking", false);
-        }
-        ApplyAttackSpeedMultiplier();
-        if (mai.IsAttacking)
-        {
-            handsAnimator.SetBool("IsAttacking", true);
-        }
-        else
-        {
-            handsAnimator.SetBool("IsAttacking", false);
+            MovementNotWalking();
         }
     }
-
-    void ApplyAttackSpeedMultiplier()
+    override protected void RefreshValues()
     {
-        handsAnimator.SetFloat("AttackSpeedMultiplier", 1 / es.ReloadTime);
-    }
-
-    void ApplyMovementSpeedMultiplier()
-    {
-        if (handsAnimator.GetFloat("MovementSpeedMultiplier") != es.MovementSpeed * 5)
-        {
-            handsAnimator.SetFloat("MovementSpeedMultiplier", es.MovementSpeed / 5);
-            legsAnimator.SetFloat("MovementSpeedMultiplier", es.MovementSpeed / 5);
-        }
+        movementSpeed = es.MovementSpeed;
+        reloadRate = es.ReloadTime;
     }
 }

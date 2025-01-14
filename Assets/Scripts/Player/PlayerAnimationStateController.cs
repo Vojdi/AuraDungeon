@@ -1,46 +1,22 @@
 using UnityEngine;
 
-public class PlayerAnimationStateController : MonoBehaviour
+public class PlayerAnimationStateController : AnimationStateController
 {
-    [SerializeField] GameObject legs;
-    [SerializeField] GameObject hands;
-    Animator legsAnimator;
-    Animator handsAnimator;
-    void Start()
-    {
-        legsAnimator = legs.GetComponent<Animator>();
-        handsAnimator = hands.GetComponent<Animator>();
-    }
     void Update()
     {
+        RefreshValues();
         if (PlayerMovement.IsWalking)
         {
-            ApplyMovementSpeedMultiplier();
-            legsAnimator.SetBool("IsWalking", true);
-            handsAnimator.SetBool("IsWalking", true);
+            MovementIsWalking();
         }
         else
         {
-            legsAnimator.SetBool("IsWalking", false);
-            handsAnimator.SetBool("IsWalking", false);
+            MovementNotWalking();
         }
     }
-    public void InitiateAttack()
+    protected override void RefreshValues()
     {
-        ApplyAttackSpeedMultiplier();
-        handsAnimator.SetBool("IsAttacking", true);
+        movementSpeed = PlayerStats.Instance.MovementSpeed;
+        reloadRate = PlayerStats.Instance.ReloadTime;
     }
-    private void ApplyMovementSpeedMultiplier()
-    {
-        if (handsAnimator.GetFloat("MovementSpeedMultiplier") != PlayerStats.Instance.MovementSpeed * 5)
-        {
-            handsAnimator.SetFloat("MovementSpeedMultiplier", PlayerStats.Instance.MovementSpeed / 5);
-            legsAnimator.SetFloat("MovementSpeedMultiplier", PlayerStats.Instance.MovementSpeed / 5);
-        }
-    }
-    private void ApplyAttackSpeedMultiplier()
-    {
-        handsAnimator.SetFloat("AttackSpeedMultiplier", 1 / PlayerStats.Instance.ReloadRate);
-    }
-   
 }

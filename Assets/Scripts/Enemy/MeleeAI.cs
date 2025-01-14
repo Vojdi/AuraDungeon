@@ -20,8 +20,7 @@ public class MeleeAI : MonoBehaviour
     bool isWalking = false;
     public bool IsWalking => isWalking;
 
-    bool isAttacking = false;
-    public bool IsAttacking => isAttacking;
+    
 
     void Start()
     {
@@ -54,7 +53,7 @@ public class MeleeAI : MonoBehaviour
             {//Enemy Followuje Hrace
                 if(enemyPlayerDistance <= es.Reach)
                 {
-                    isAttacking = true;
+                    asc.InitiateAttack();
                     isWalking = false;
                     agent.ResetPath();
                 }
@@ -126,8 +125,5 @@ public class MeleeAI : MonoBehaviour
         isWalking = true;
         idleMovementOpportunity = 0;
     }
-    public void StopAttacking()
-    {
-        isAttacking = false;
-    }
+   
 }
