@@ -30,13 +30,13 @@ public class PlayerStats : MonoBehaviour
     void Awake()
     {
         instance = this;
-        maxHp = 100;
+        maxHp = 500;
         damage = 10;
         range = 20f;
         movementSpeed = 7f;
         reloadTime = 1f;
         projectileSpeed = 20f;
-        aura = 10;
+        aura = 0;
     }
     public static void ChangeAura(int value)
     {

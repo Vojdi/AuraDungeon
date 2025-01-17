@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -31,7 +30,8 @@ public class PlayerMovement : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        if (moveX == 0 && moveZ == 0) { 
+        if (moveX == 0 && moveZ == 0)
+        {
             isWalking = false;
         }
         else
@@ -43,6 +43,9 @@ public class PlayerMovement : MonoBehaviour
 
         forward.y = 0f;
         right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
 
         moveDirection = (right * moveX + forward * moveZ);
     }

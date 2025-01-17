@@ -30,6 +30,7 @@ public class AnimationStateController : MonoBehaviour
     private void ApplyAttackSpeedMultiplier()
     {
         handsAnimator.SetFloat("AttackSpeedMultiplier", 1 / reloadRate);
+        legsAnimator.SetFloat("AttackSpeedMultiplier", 1 / reloadRate);
     }
     protected void MovementIsWalking()
     {
@@ -46,5 +47,6 @@ public class AnimationStateController : MonoBehaviour
     {
         ApplyAttackSpeedMultiplier();
         handsAnimator.SetBool("IsAttacking", true);
+        legsAnimator.SetBool("IsAttacking", true);
     }
 }

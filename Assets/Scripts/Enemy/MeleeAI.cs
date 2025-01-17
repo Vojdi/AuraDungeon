@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
@@ -18,6 +19,7 @@ public class MeleeAI : MonoBehaviour
     bool lockedFleeState = false;
     float fleeSpeedMultiplier = 2f;
     bool isWalking = false;
+   
     public bool IsWalking => isWalking;
 
     
@@ -45,18 +47,23 @@ public class MeleeAI : MonoBehaviour
             return;
         }
         agent.speed = es.MovementSpeed;
+        
         float enemyPlayerDistance = Vector3.Distance(PlayerMovement.PlayerPosition, transform.position);
         if (enemyPlayerDistance < es.SightRange || isTriggered)
         {
             agent.autoBraking = false;
-            if (es.AuraToughness > PlayerStats.Instance.Aura)
+            if (es.AuraToughness >= PlayerStats.Instance.Aura)
             {//Enemy Followuje Hrace
                 if(enemyPlayerDistance <= es.Reach)
                 {
+                    
                     asc.InitiateAttack();
+                    transform.LookAt(PlayerMovement.PlayerPosition);
                     isWalking = false;
                     agent.ResetPath();
+
                 }
+                
                 else
                 {
                     agent.SetDestination(PlayerMovement.PlayerPosition);
@@ -125,5 +132,6 @@ public class MeleeAI : MonoBehaviour
         isWalking = true;
         idleMovementOpportunity = 0;
     }
+    
    
 }

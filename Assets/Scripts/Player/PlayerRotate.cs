@@ -15,6 +15,7 @@ public class PlayerRotate : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
+        lineRenderer.enabled = false;
     }
     void Update()
     {

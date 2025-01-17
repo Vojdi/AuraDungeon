@@ -27,19 +27,12 @@ public class PlayerAttack : MonoBehaviour
             lineRenderer.material = lineMaterials[1];
             playerAnimationStateController.InitiateAttack();
         }
-        else if(Input.GetButton("Attack"))
-        {
-            lineRenderer.material = lineMaterials[1];
-        }
-        else
-        {
-            lineRenderer.material = lineMaterials[0];
-        }
     }
     public void Attack()
     {
         if (reloaded) 
         {
+          
             Projectile projectile = PlayerObjPool.projectiles[0];
             PlayerObjPool.projectiles.Remove(PlayerObjPool.projectiles[0]);
             projectile.gameObject.SetActive(true);
@@ -51,6 +44,7 @@ public class PlayerAttack : MonoBehaviour
     }
     public void Reload()
     {
+        lineRenderer.material = lineMaterials[0];
         reloaded = true;
     } 
 }

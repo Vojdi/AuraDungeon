@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
     }
     public void Cast()
     {    
-        direction = PlayerRotate.LookDirection;
+        direction = PlayerRotate.LookDirection.normalized;
         startPlayerPos = PlayerMovement.PlayerPosition;
         distanceTravelled = 0f;
         readyToTravel = true;

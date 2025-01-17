@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class OnEnemyHandsAttack : MonoBehaviour
+public class OnGoblinClubberHandsAttack : MonoBehaviour
 {
     [SerializeField] Collider col;
     Animator handsAnimator;
+    
 
     private void Start()
     {
@@ -32,4 +33,5 @@ public class OnEnemyHandsAttack : MonoBehaviour
     {
         handsAnimator.SetBool("IsAttacking", false);
     }
+    
 }
