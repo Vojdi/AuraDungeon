@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerHandsOnAttack : MonoBehaviour
+public class OnPlayerHandsAttack : MonoBehaviour
 {
     PlayerAttack playerAttack;
     Animator handsAnimator;

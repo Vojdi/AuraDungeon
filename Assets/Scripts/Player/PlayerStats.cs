@@ -30,7 +30,7 @@ public class PlayerStats : MonoBehaviour
     void Awake()
     {
         instance = this;
-        maxHp = 500;
+        maxHp = 100;
         damage = 10;
         range = 20f;
         movementSpeed = 7f;

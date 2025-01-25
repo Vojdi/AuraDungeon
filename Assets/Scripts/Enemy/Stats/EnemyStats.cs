@@ -17,4 +17,11 @@ public class EnemyStats : MonoBehaviour
     protected int damage;
     public int Damage => damage;
 
+    //ranged enemy only
+    protected float projectileSpeed;
+    public float ProjectileSpeed => projectileSpeed;
+
+    protected float projectileRange;
+    public float ProjectileRange => projectileRange;
+
 }

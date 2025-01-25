@@ -18,7 +18,6 @@ public class OnOrcBerserkAttack : MonoBehaviour
         var php = other.gameObject.GetComponent<PlayerHp>();
         if (php != null)
         {
-
             php.DoDmg(transform.root.gameObject.GetComponent<EnemyStats>().Damage);
             EndAttack();
         }
@@ -26,7 +25,6 @@ public class OnOrcBerserkAttack : MonoBehaviour
     void EndAttack()
     {
         col.enabled = false;
-
     }
     void EndAnimation()
     {

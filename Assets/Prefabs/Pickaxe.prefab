@@ -110,7 +110,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3105325042908350022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 896e2d4945692e54c850471ee708e33e, type: 3}
+  m_Script: {fileID: 11500000, guid: 76694e08e208bd642af581ee8c16e5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   endProjectileTransform: {fileID: 5310541659798507015}

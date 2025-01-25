@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public List<Projectile> projectiles = new List<Projectile>();  
+    public List<PlayerProjectile> projectiles = new List<PlayerProjectile>();  
     private void Start()
     {
-        var projectile = GetComponent<PlayerAttack>().ProjectilePrefab.GetComponent<Projectile>();
+        var projectile = GetComponent<PlayerAttack>().ProjectilePrefab.GetComponent<PlayerProjectile>();
         for (int i = 0; i < 7; i++) {
             var prj = Instantiate(projectile, Waste.Instance.transform);
             projectiles.Add(prj);

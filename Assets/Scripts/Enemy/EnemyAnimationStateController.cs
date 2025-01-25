@@ -1,23 +1,22 @@
 using System;
 using UnityEngine;
 
-public class MeleeEnemyAnimationStateController : AnimationStateController
+public class EnemyAnimationStateController : AnimationStateController
 {
-    MeleeAI mai;
-    EnemyStats es;
+    EnemyAI eAI;
+    EnemyStats eS;
     override protected void Start()
     {
         base.Start();
-        mai = GetComponent<MeleeAI>();
-        es = GetComponent<EnemyStats>();
+        eAI = GetComponent<EnemyAI>();
+        eS = GetComponent<EnemyStats>();
     }
     void Update()
     {
         RefreshValues();
-        if (mai.IsWalking)
+        if (eAI.IsWalking)
         {
             MovementIsWalking();
-
         }
         else
         {
@@ -26,7 +25,7 @@ public class MeleeEnemyAnimationStateController : AnimationStateController
     }
     override protected void RefreshValues()
     {
-        movementSpeed = es.MovementSpeed;
-        reloadRate = es.ReloadTime;
+        movementSpeed = eS.MovementSpeed;
+        reloadRate = eS.ReloadTime;
     }
 }

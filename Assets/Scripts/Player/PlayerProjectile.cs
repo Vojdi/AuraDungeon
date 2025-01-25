@@ -1,13 +1,11 @@
 using UnityEngine;
-
-public class Projectile : MonoBehaviour
+public class PlayerProjectile : MonoBehaviour
 {
     [SerializeField] Transform endProjectileTransform;
     Vector3 direction;
     Vector3 startPlayerPos;
     float distanceTravelled;
     bool readyToTravel = false;
-    
     
     void Update()
     {

@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,6 +7,7 @@ public class TestingEnemySpawn : MonoBehaviour
 {
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject enemy1;
+    [SerializeField] GameObject enemy2;
     LineRenderer lineRenderer;
 
     void Start()
@@ -16,11 +18,15 @@ public class TestingEnemySpawn : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            var en = Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+            SpawnEnemy(enemy);
         }
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
-            var en = Instantiate(enemy1, new Vector3(0, 0, 0), Quaternion.identity);
+            SpawnEnemy(enemy1);
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            SpawnEnemy(enemy2);
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
@@ -37,5 +43,17 @@ public class TestingEnemySpawn : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1)) { 
             lineRenderer.enabled = !lineRenderer.enabled;
         }
+        IEnumerator Niga(GameObject en)
+        {
+            yield return null;
+            en.SetActive(false);
+            en.transform.position = Vector3.zero;
+            en.SetActive(true);
+        }
+        void SpawnEnemy(GameObject enemy){
+            var en = Instantiate(enemy, new Vector3(0, 100, 0), Quaternion.identity);
+            StartCoroutine(Niga(en));
+        }
     }
+    
 }
