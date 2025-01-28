@@ -9,7 +9,7 @@ public class OrcBerserkStats : EnemyStats
         auraToughness = 8;
         movementSpeed = 3;
         reloadTime = 1f;
-        reach = 4.5f;
+        reach = 6f;
         damage = 40;
     }
 }

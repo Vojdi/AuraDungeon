@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
@@ -8,7 +9,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject projectilePrefab;   
     public GameObject ProjectilePrefab => projectilePrefab;
     LineRenderer lineRenderer;
-    public static ObjectPool PlayerObjPool;
+    public List<PlayerProjectile> projectiles;
+    
 
     PlayerAnimationStateController playerAnimationStateController;
 
@@ -18,7 +20,16 @@ public class PlayerAttack : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         playerAnimationStateController = GetComponent<PlayerAnimationStateController>();
         reloaded = true;
-        PlayerObjPool = GetComponent<ObjectPool>();
+
+        var projectile = GetComponent<PlayerAttack>().ProjectilePrefab.GetComponent<PlayerProjectile>();
+        for (int i = 0; i < 5; i++)
+        {
+            var prj = Instantiate(projectile, Waste.Instance.transform);
+            prj.spawner = this;
+            projectiles.Add(prj);
+            prj.gameObject.SetActive(false);
+
+        }
     }
     void Update()
     {
@@ -32,8 +43,8 @@ public class PlayerAttack : MonoBehaviour
     {
         if (reloaded) 
         {
-            PlayerProjectile projectile = PlayerObjPool.projectiles[0];
-            PlayerObjPool.projectiles.Remove(PlayerObjPool.projectiles[0]);
+            PlayerProjectile projectile = projectiles[0];
+            projectiles.Remove(projectiles[0]);
             projectile.gameObject.SetActive(true);
             projectile.transform.position = projectileSpawnTransform.position;
             projectile.transform.rotation = projectileSpawnTransform.rotation;

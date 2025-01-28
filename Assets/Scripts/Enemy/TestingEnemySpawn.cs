@@ -43,7 +43,7 @@ public class TestingEnemySpawn : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1)) { 
             lineRenderer.enabled = !lineRenderer.enabled;
         }
-        IEnumerator Niga(GameObject en)
+        IEnumerator Cook(GameObject en)
         {
             yield return null;
             en.SetActive(false);
@@ -52,7 +52,7 @@ public class TestingEnemySpawn : MonoBehaviour
         }
         void SpawnEnemy(GameObject enemy){
             var en = Instantiate(enemy, new Vector3(0, 100, 0), Quaternion.identity);
-            StartCoroutine(Niga(en));
+            StartCoroutine(Cook(en));
         }
     }
     

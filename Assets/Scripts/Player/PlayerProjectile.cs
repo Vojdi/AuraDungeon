@@ -2,10 +2,12 @@ using UnityEngine;
 public class PlayerProjectile : MonoBehaviour
 {
     [SerializeField] Transform endProjectileTransform;
+    
     Vector3 direction;
     Vector3 startPlayerPos;
     float distanceTravelled;
     bool readyToTravel = false;
+    public PlayerAttack spawner;
     
     void Update()
     {
@@ -18,7 +20,7 @@ public class PlayerProjectile : MonoBehaviour
     public void Cast()
     {    
         direction = PlayerRotate.LookDirection.normalized;
-        startPlayerPos = PlayerMovement.PlayerPosition;
+        startPlayerPos = spawner.transform.position;
         distanceTravelled = 0f;
         readyToTravel = true;
     }
@@ -49,7 +51,7 @@ public class PlayerProjectile : MonoBehaviour
     }
     void AddToPool()
     {
-        PlayerAttack.PlayerObjPool.projectiles.Add(this);
+        spawner.projectiles.Add(this);
         this.gameObject.SetActive(false);
     }
 }

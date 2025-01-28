@@ -1091,7 +1091,6 @@ GameObject:
   - component: {fileID: 357121525}
   - component: {fileID: 357121526}
   - component: {fileID: 357121527}
-  - component: {fileID: 357121528}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1279,6 +1278,7 @@ MonoBehaviour:
   projectileSpawnTransform: {fileID: 91221089}
   projectilePrefab: {fileID: 3105325042908350022, guid: 099c21350c7f1004ea30ace4c8ef9e11,
     type: 3}
+  projectiles: []
 --- !u!143 &357121525
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1331,19 +1331,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 0
---- !u!114 &357121528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 357121515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4769aec0c85eec43993d43bf314fbc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectiles: []
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

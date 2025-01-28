@@ -16,6 +16,4 @@ public class EnemyAI : MonoBehaviour
         asc = GetComponent<AnimationStateController>();
         agent = GetComponent<NavMeshAgent>();
     }
-
-    
 }

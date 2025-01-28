@@ -14,7 +14,7 @@ public class RangedEnemyAttack : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             var prj = Instantiate(projectile, Waste.Instance.transform);
-            prj.spawner = this.GetComponent<RangedEnemyAttack>();
+            prj.spawner = this;
             projectiles.Add(prj);
             prj.gameObject.SetActive(false);
         }
