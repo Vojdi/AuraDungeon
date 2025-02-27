@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour
     protected AnimationStateController asc;
     protected NavMeshAgent agent;
     protected bool isWalking = false;
+    
     public bool IsWalking => isWalking;
     void Start()
     {
@@ -15,5 +16,6 @@ public class EnemyAI : MonoBehaviour
         es = GetComponent<EnemyStats>();
         asc = GetComponent<AnimationStateController>();
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = es.MovementSpeed;
     }
 }

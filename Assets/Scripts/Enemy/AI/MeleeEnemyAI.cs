@@ -16,6 +16,7 @@ public class MeleeEnemyAI : EnemyAI
 
     void Update()
     {
+        
         CheckForImportantVariables();
         if (lockedFleeState)
         {
@@ -29,6 +30,7 @@ public class MeleeEnemyAI : EnemyAI
                 return;
             }
         }
+        agent.speed = es.MovementSpeed;
         if (delayBetweenFollowing)
         {
             return;
@@ -85,7 +87,6 @@ public class MeleeEnemyAI : EnemyAI
 
     void FleeingState(float enemyPlayerDistance)
     {
-        Debug.Log(enemyPlayerDistance);
         Vector3 directionFromPlayer = (transform.position - PlayerMovement.PlayerPosition).normalized;
         Vector3 fleePosition = transform.position + directionFromPlayer * 2;
         if (!NavMesh.SamplePosition(fleePosition, out NavMeshHit hit, 1, NavMesh.AllAreas))
@@ -94,7 +95,7 @@ public class MeleeEnemyAI : EnemyAI
                 lockedFleeState = true;
                 agent.speed *= fleeSpeedMultiplier;
         }
-        if(lockedFleeState && enemyPlayerDistance > 6)
+        if(lockedFleeState && enemyPlayerDistance > 10)
         {
             isWalking = false;
         }

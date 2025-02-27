@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 
 
@@ -11,39 +12,52 @@ public class RangedEnemyAI : EnemyAI
     bool lockedFleeState = false;
     float fleeSpeedMultiplier = 2f;
     bool delayBetweenFollowing = false;
+    int currentBehaviour = 0;
+    float reach;
+    float sightRange;
+    
 
 
 
     void Update()
     {
+
+
         CheckForImportantVariables();
-        if (lockedFleeState)
-        {
-            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-            {
-                lockedFleeState = false;
-                agent.speed = es.MovementSpeed;
-            }
-            else
-            {
-                return;
-            }
-        }
-        if (delayBetweenFollowing)
-        {
-            return;
-        }
+
         float enemyPlayerDistance = Vector3.Distance(PlayerMovement.PlayerPosition, transform.position);
         if (enemyPlayerDistance < es.SightRange || isTriggered)
         {
+            agent.updateRotation = false;
+            transform.LookAt(new Vector3(PlayerMovement.PlayerPosition.x, transform.position.y, PlayerMovement.PlayerPosition.z));
+            if (lockedFleeState)
+            {
+                if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    lockedFleeState = false;
+                    agent.speed = es.MovementSpeed;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            if (delayBetweenFollowing)
+            {
+                return;
+            }
+            agent.speed = es.MovementSpeed;
             agent.autoBraking = false;
             if (es.AuraToughness >= PlayerStats.Instance.Aura)
             {//Enemy Followuje Hrace
                 AttackState(enemyPlayerDistance);
             }
             else
-            {//Enemy zdrha
-                FleeingState(enemyPlayerDistance);
+            {
+                agent.speed = es.MovementSpeed / 2;
+                reach = reach / 1.5f;
+                sightRange = sightRange / 1.5f;
+                AttackState(enemyPlayerDistance);
             }
         }
         else //Prochazky
@@ -54,6 +68,8 @@ public class RangedEnemyAI : EnemyAI
 
     void ProchazkyState()
     {
+        agent.updateRotation = true;
+        agent.speed = es.MovementSpeed;
         agent.autoBraking = true;
         if (!agent.pathPending && !agent.hasPath && !(agent.remainingDistance > agent.stoppingDistance))
         {
@@ -85,7 +101,6 @@ public class RangedEnemyAI : EnemyAI
 
     void FleeingState(float enemyPlayerDistance)
     {
-        Debug.Log(enemyPlayerDistance);
         Vector3 directionFromPlayer = (transform.position - PlayerMovement.PlayerPosition).normalized;
         Vector3 fleePosition = transform.position + directionFromPlayer * 2;
         if (!NavMesh.SamplePosition(fleePosition, out NavMeshHit hit, 1, NavMesh.AllAreas))
@@ -113,25 +128,41 @@ public class RangedEnemyAI : EnemyAI
     }
     void AttackState(float enemyPlayerDistance)
     {
-        if (enemyPlayerDistance <= es.Reach)
-        {
-            asc.InitiateAttack();
-            transform.LookAt(new Vector3(PlayerMovement.PlayerPosition.x, transform.position.y, PlayerMovement.PlayerPosition.z));
-            isWalking = false;
-            agent.ResetPath();
-            delayBetweenFollowing = true;
-            StartCoroutine(DelayBetweenFollowing());
+        int behaviour;
 
-        }
-        else
+        if (enemyPlayerDistance > reach)
         {
+            //enenmy is far
+            behaviour = 1;
+            CheckForBehaviourChange(behaviour);
             agent.SetDestination(PlayerMovement.PlayerPosition);
             SetWalkingTrue();
         }
+        else if (enemyPlayerDistance < reach / 1.5)
+        {
+
+            //enemy is too close
+            behaviour = 3;
+            agent.ResetPath();
+            CheckForBehaviourChange(behaviour);
+            asc.InitiateAttack();
+            isWalking = true;
+            FleeingState(enemyPlayerDistance);
+        }
+        else
+        {
+
+            //enemy is desired range
+            behaviour = 2;
+            agent.ResetPath();
+            CheckForBehaviourChange(behaviour);
+            asc.InitiateAttack();
+            isWalking = false;
+        }
     }
-    IEnumerator DelayBetweenFollowing()
+    IEnumerator DelayBetweenFollowing(float time)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(time);
         delayBetweenFollowing = false;
     }
     void SetWalkingTrue()
@@ -145,5 +176,30 @@ public class RangedEnemyAI : EnemyAI
         {
             isTriggered = true;
         }
+        reach = es.Reach;
+        sightRange = es.SightRange;
+    }
+    void CheckForBehaviourChange(int behaviour)
+    {
+        if (currentBehaviour != behaviour)
+        {
+            if(currentBehaviour - behaviour == 1 || currentBehaviour == 3 &&behaviour == 1)
+            {
+                currentBehaviour = behaviour;
+                delayBetweenFollowing = true;
+                StartCoroutine(DelayBetweenFollowing(0.5f));
+            }
+            else
+            {
+                currentBehaviour = behaviour;
+                return;
+            }
+        }
+        else
+        {
+            currentBehaviour = behaviour;
+            return;
+        }
+        
     }
 }

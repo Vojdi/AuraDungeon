@@ -4,8 +4,8 @@ public class GoblinClubberStats : EnemyStats
 {
     private void Awake()
     {
-        maxHp = 40;
-        sightRange = 15;
+        maxHp = 50;
+        sightRange = 18;
         auraToughness = 5;
         movementSpeed = 6;
         reloadTime = 2f;
