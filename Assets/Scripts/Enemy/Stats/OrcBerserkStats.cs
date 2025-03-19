@@ -11,5 +11,6 @@ public class OrcBerserkStats : EnemyStats
         reloadTime = 1f;
         reach = 6f;
         damage = 30;
+        dangerValue = 3;
     }
 }

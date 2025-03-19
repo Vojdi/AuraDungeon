@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 869866694979638912}
   - component: {fileID: 6714662545664680527}
   - component: {fileID: 8056300331831893464}
-  - component: {fileID: 5173439177910153421}
+  - component: {fileID: -295652880383436285}
   m_Layer: 0
   m_Name: GoblinThrower
   m_TagString: Untagged
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c8c5d6f51edc1489ef89a3cf2c3b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5173439177910153421
+--- !u!114 &-295652880383436285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -324,9 +324,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3891238291823710242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37faa7cc5d7cd664eaa977d8b00ef9f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 33d6a92aab9b10e48ba64c17b6d2caa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 30
+  auraToughness: 5
+  sightRange: 25
+  movementSpeed: 9
+  reloadTime: 2
+  reach: 20
+  damage: 10
+  dangerValue: 1
+  projectileSpeed: 20
+  projectileRange: 20
 --- !u!1 &4506578657507671365
 GameObject:
   m_ObjectHideFlags: 0

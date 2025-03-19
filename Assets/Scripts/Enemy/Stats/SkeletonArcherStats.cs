@@ -14,5 +14,6 @@ public class SkeletonArcherStats : EnemyStats
         damage = 40;
         projectileSpeed = 50;
         projectileRange = 30;
+        dangerValue = 3;
     }
 }

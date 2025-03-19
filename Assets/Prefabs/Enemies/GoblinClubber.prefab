@@ -161,8 +161,8 @@ GameObject:
   - component: {fileID: 9188988793541383531}
   - component: {fileID: 2880085381138627051}
   - component: {fileID: 8101020487095230762}
-  - component: {fileID: 2943245962425753808}
   - component: {fileID: 869866694979638912}
+  - component: {fileID: 6270657851026048634}
   m_Layer: 0
   m_Name: GoblinClubber
   m_TagString: Untagged
@@ -275,18 +275,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   legs: {fileID: 2693798598719022609}
   hands: {fileID: 3723879470959597826}
---- !u!114 &2943245962425753808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3891238291823710242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ece83adb383c08440a51fa5fcb99fc26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &869866694979638912
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -310,6 +298,28 @@ CapsuleCollider:
   m_Height: 4.3636045
   m_Direction: 1
   m_Center: {x: 0.0473423, y: 1.5999999, z: -0.23184443}
+--- !u!114 &6270657851026048634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891238291823710242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33d6a92aab9b10e48ba64c17b6d2caa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 50
+  auraToughness: 5
+  sightRange: 18
+  movementSpeed: 6
+  reloadTime: 2
+  reach: 3.5
+  damage: 20
+  dangerValue: 1
+  projectileSpeed: 0
+  projectileRange: 0
 --- !u!1 &4506578657507671365
 GameObject:
   m_ObjectHideFlags: 0

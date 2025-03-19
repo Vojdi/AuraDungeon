@@ -52,7 +52,7 @@ public class TestingEnemySpawn : MonoBehaviour
         {
             yield return null;
             en.SetActive(false);
-            en.transform.position = Vector3.zero;
+            en.transform.position = new Vector3(0, 0.5f, 0);
             en.SetActive(true);
         }
         void SpawnEnemy(GameObject enemy){

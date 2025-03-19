@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GoblinThrowerStats : EnemyStats
 {
+    
     private void Awake()
     {
         maxHp = 30;
@@ -14,5 +15,6 @@ public class GoblinThrowerStats : EnemyStats
         damage = 10;
         projectileSpeed = 20;
         projectileRange = 20;
+        dangerValue = 1;
     }
 }

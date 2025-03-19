@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 2880085381138627051}
   - component: {fileID: 8101020487095230762}
   - component: {fileID: 869866694979638912}
-  - component: {fileID: 6513956823810660150}
+  - component: {fileID: -2282098917457730964}
   m_Layer: 0
   m_Name: OrcBerserk
   m_TagString: Untagged
@@ -298,7 +298,7 @@ CapsuleCollider:
   m_Height: 6.1880116
   m_Direction: 1
   m_Center: {x: 0.0473423, y: 2.5122035, z: -0.23184443}
---- !u!114 &6513956823810660150
+--- !u!114 &-2282098917457730964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -307,9 +307,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3891238291823710242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67cd519de601b324a94f164f1bef5661, type: 3}
+  m_Script: {fileID: 11500000, guid: 33d6a92aab9b10e48ba64c17b6d2caa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 80
+  auraToughness: 8
+  sightRange: 18
+  movementSpeed: 3
+  reloadTime: 1
+  reach: 6
+  damage: 30
+  dangerValue: 3
+  projectileSpeed: 0
+  projectileRange: 0
 --- !u!1 &4506578657507671365
 GameObject:
   m_ObjectHideFlags: 0

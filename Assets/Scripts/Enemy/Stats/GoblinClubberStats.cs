@@ -11,5 +11,6 @@ public class GoblinClubberStats : EnemyStats
         reloadTime = 2f;
         reach = 3.5f;
         damage = 20;
+        dangerValue = 1;
     }
 }

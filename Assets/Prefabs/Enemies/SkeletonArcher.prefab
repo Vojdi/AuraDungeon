@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 869866694979638912}
   - component: {fileID: 6714662545664680527}
   - component: {fileID: 8056300331831893464}
-  - component: {fileID: 8532794491343271302}
+  - component: {fileID: -7639456485819793364}
   m_Layer: 0
   m_Name: SkeletonArcher
   m_TagString: Untagged
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c8c5d6f51edc1489ef89a3cf2c3b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8532794491343271302
+--- !u!114 &-7639456485819793364
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -324,9 +324,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3891238291823710242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe516bea0cd08a54dbbc3af4b9256079, type: 3}
+  m_Script: {fileID: 11500000, guid: 33d6a92aab9b10e48ba64c17b6d2caa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 50
+  auraToughness: 8
+  sightRange: 35
+  movementSpeed: 7
+  reloadTime: 3
+  reach: 30
+  damage: 40
+  dangerValue: 3
+  projectileSpeed: 50
+  projectileRange: 30
 --- !u!1 &4506578657507671365
 GameObject:
   m_ObjectHideFlags: 0
