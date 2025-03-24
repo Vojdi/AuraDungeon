@@ -12,10 +12,12 @@ public class EnemyProjectile : MonoBehaviour
     float projectileRange;
 
     public RangedEnemyAttack spawner;
+    int spawnerDamage;
     private void Start()
     {
         projectileSpeed = spawner.GetComponent<EnemyStats>().ProjectileSpeed;
         projectileRange = spawner.GetComponent<EnemyStats>().ProjectileRange;
+        spawnerDamage = spawner.GetComponent<EnemyStats>().Damage;
     }
 
     public void Cast()
@@ -53,7 +55,7 @@ public class EnemyProjectile : MonoBehaviour
             var php = other.gameObject.GetComponent<PlayerHp>();
             if (php != null)
             {
-                php.DoDmg(spawner.GetComponent<EnemyStats>().Damage);
+                php.DoDmg(spawnerDamage);
             }
             AddToPool();
         }

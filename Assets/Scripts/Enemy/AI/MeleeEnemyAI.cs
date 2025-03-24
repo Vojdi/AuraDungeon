@@ -109,7 +109,7 @@ public class MeleeEnemyAI : EnemyAI
     {
         int distance = Random.Range(11, 14);
         int[] possibleMoveValues = new int[] { distance, distance + 2, distance - 2 };
-        Vector3 NewFleePosition = (Vector3.zero - transform.position).normalized * possibleMoveValues[Random.Range(0, 3)];
+        Vector3 NewFleePosition = (GameManager.Instance.currentRoom.transform.position - transform.position).normalized * possibleMoveValues[Random.Range(0, 3)];
         return NewFleePosition;
     }
     void AttackState(float enemyPlayerDistance)

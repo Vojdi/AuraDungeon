@@ -11,12 +11,6 @@ public class PlayerHp : Hp
     }
     override protected void Die()
     {
-        Debug.Log("U Died");
-        //dodelat
+        GameManager.Instance.GameOver();
     }
-
-
-
-
-
 }

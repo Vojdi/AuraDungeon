@@ -3,7 +3,6 @@ using UnityEngine;
 public class EnemyHp : Hp
 {
     EnemyStats stats;
-    
     override protected void Start()
     {
         stats = GetComponent<EnemyStats>();
@@ -14,6 +13,7 @@ public class EnemyHp : Hp
     
     override protected void Die()
     {
+        GameManager.Instance.EnemyDied(gameObject);
         Destroy(gameObject);
     }
 }
