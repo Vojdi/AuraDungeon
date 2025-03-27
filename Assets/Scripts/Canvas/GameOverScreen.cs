@@ -21,12 +21,10 @@ public class GameOverScreen : MonoBehaviour
     }
     public void Enable(int roomCount)
     {
+        Time.timeScale = 0;
         mainPanel.SetActive(true);
         healthBarGraphics.SetActive(false);
-        roomCountPanel.text = $"You have survived {roomCount.ToString()} rooms";
+        roomCountPanel.text = $"You have successfully survived {roomCount.ToString()} rooms";
     }
-    private void UpdateRoomCount()
-    {
-        
-    }
+    
 }

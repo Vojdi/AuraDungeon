@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         {
             currentRoom.GetComponentInChildren<WallsHandler>().DeactivateWalls();
             danger++;
+            PowerUp();
             GenerateNextRoom();
         }
     }
@@ -133,7 +134,11 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        Time.timeScale = 0;
+       
         GameOverScreen.Instance.Enable(roomCount);
+    }
+    private void PowerUp()
+    {
+        PowerUpScreen.Instance.Enable();
     }
 }

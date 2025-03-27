@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using System;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class PlayerStats : MonoBehaviour
         instance = this;
         maxHp = 100;
         damage = 10;
-        range = 20f;
+        range = 15;
         movementSpeed = 7f;
         reloadTime = 1f;
         projectileSpeed = 20f;
@@ -42,5 +43,31 @@ public class PlayerStats : MonoBehaviour
     {
         Instance.aura = value;
     }
-
+    public void PowerUpAttackSpeed(float value)
+    {
+        float inversedReloadTime = 1 / reloadTime;
+        reloadTime = 1/(inversedReloadTime + ((inversedReloadTime / 100) * value));
+    }
+    public void PowerUpAttackDamage(float value)
+    {
+        damage = damage + (int)Math.Ceiling((double)damage / 100 * value);
+    }
+    public void PowerUpAttackRange(float value)
+    {
+        range = range + (range/100 * value);
+    }
+    public void PowerUpMovementSpeed(float value)
+    {
+        movementSpeed = movementSpeed + (movementSpeed / 100 * value);
+    }
+    public void PowerUpProjectileSpeed(float value)
+    {
+        projectileSpeed = projectileSpeed + (projectileSpeed / 100 * value);
+    }
+    public void PowerUpMaxHp(float value)
+    {
+        maxHp = maxHp + (int)Math.Ceiling((double)maxHp / 100 * value);
+        GetComponent<PlayerHp>().UpdateHp();
+        
+    }
 }

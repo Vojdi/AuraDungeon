@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Hp : MonoBehaviour
 {
-    private int health;
+    protected int health;
     public int Health => health;
     public int MaxHealth;
 
@@ -20,4 +20,5 @@ public abstract class Hp : MonoBehaviour
         }
     }
     protected abstract void Die();
+   
 }
