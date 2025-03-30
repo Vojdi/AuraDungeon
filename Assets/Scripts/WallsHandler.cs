@@ -9,7 +9,7 @@ public class WallsHandler : MonoBehaviour
         {
             ActivateWalls();
             GetComponent<Collider>().enabled = false;
-            GameManager.Instance.DestroyPrevRoom();
+            GameManager.Instance.DropPrevRoom();
             GameManager.Instance.SpawnEnemies();
         }
     }

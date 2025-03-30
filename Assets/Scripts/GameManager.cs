@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     int roomCount;
     int danger = 2;
+    bool destroyRoom = false;
 
     private void Awake()
     {
@@ -51,6 +52,10 @@ public class GameManager : MonoBehaviour
         roomCount++;
         previousRoom = currentRoom;
         GameObject roomType = rooms[Random.Range(0, rooms.Count)];
+        //Vector3 loc = currentRoom.transform.position + possibleGeneratingValues[Random.Range(0, 2)];//
+        //loc.y += 50;//
+        //var instantiatedRoomType = Instantiate(roomType, loc, Quaternion.identity);//
+        //instantiatedRoomType.GetComponent<Animator>().Play("drop");//
         var instantiatedRoomType = Instantiate(roomType, currentRoom.transform.position + possibleGeneratingValues[Random.Range(0, 2)], Quaternion.identity);
         currentRoom = instantiatedRoomType;
         CalculateSpawnEnemies();
@@ -73,11 +78,19 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public void DestroyPrevRoom()
+    public void DropPrevRoom()
     {
-
         Destroy(previousRoom);
+        //previousRoom.GetComponent<Animator>().Play("drop");//
+        //destroyRoom = true;
     }
+    /*public void DestroyIfNecessary()
+    {
+        if (destroyRoom) { 
+            Destroy(previousRoom);
+            destroyRoom = false;
+        }
+    }*/
     public void EnemyDied(GameObject enemy)
     {
         currentSpawnedEnemies.Remove(enemy);

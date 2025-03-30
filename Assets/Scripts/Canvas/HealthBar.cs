@@ -23,7 +23,6 @@ public class HealthBar : MonoBehaviour
     {
         if(hBSlider.maxValue != hp.MaxHealth || eHBSlider.maxValue != hp.MaxHealth )
         {
-            Debug.Log("grrr");
             hBSlider.maxValue = hp.MaxHealth;
             eHBSlider.maxValue = hp.MaxHealth;
          
