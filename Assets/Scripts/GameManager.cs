@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         roomCount = -1;
-        GenerateNextRoom();
+        
     }
     private void LoadFirstRoom()
     {
@@ -46,19 +47,47 @@ public class GameManager : MonoBehaviour
         currentRoom = instantiatedRoom;
         Time.timeScale = 1;
         instantiatedRoom.GetComponentInChildren<WallsHandler>().DeactivateWalls();
+        GenerateNextRoom();
     }
     private void GenerateNextRoom()
     {
         roomCount++;
         previousRoom = currentRoom;
         GameObject roomType = rooms[Random.Range(0, rooms.Count)];
-        //Vector3 loc = currentRoom.transform.position + possibleGeneratingValues[Random.Range(0, 2)];//
-        //loc.y += 50;//
-        //var instantiatedRoomType = Instantiate(roomType, loc, Quaternion.identity);//
-        //instantiatedRoomType.GetComponent<Animator>().Play("drop");//
-        var instantiatedRoomType = Instantiate(roomType, currentRoom.transform.position + possibleGeneratingValues[Random.Range(0, 2)], Quaternion.identity);
+        Vector3 loc = currentRoom.transform.position + possibleGeneratingValues[Random.Range(0, 2)];//
+        loc.y += 50;//
+        var instantiatedRoomType = Instantiate(roomType, loc, Quaternion.identity);//
+        instantiatedRoomType.GetComponent<Animator>().Play("drop");//
+        //var instantiatedRoomType = Instantiate(roomType, currentRoom.transform.position + possibleGeneratingValues[Random.Range(0, 2)], Quaternion.identity);
         currentRoom = instantiatedRoomType;
         CalculateSpawnEnemies();
+    }
+    
+    public void DropPrevRoom()
+    {
+        //Destroy(previousRoom);
+        var anim = previousRoom.GetComponent<Animator>();
+        anim.Rebind();
+        anim.Play("drop");
+        destroyRoom = true;
+    }
+    public void DestroyIfNecessary()
+    {
+        if (destroyRoom) { 
+            Destroy(previousRoom);
+            destroyRoom = false;
+        }
+    }
+    public void EnemyDied(GameObject enemy)
+    {
+        currentSpawnedEnemies.Remove(enemy);
+        if (currentSpawnedEnemies.Count == 0)
+        {
+            currentRoom.GetComponentInChildren<WallsHandler>().DeactivateWalls();
+            danger++;
+            PowerUp();
+            GenerateNextRoom();
+        }
     }
     private void CalculateSpawnEnemies()
     {
@@ -76,30 +105,6 @@ public class GameManager : MonoBehaviour
                 currentDanger += potentialEnemy.DangerValue;
                 currentRoomEnemiesToSpawn.Add(potentialEnemy);
             }
-        }
-    }
-    public void DropPrevRoom()
-    {
-        Destroy(previousRoom);
-        //previousRoom.GetComponent<Animator>().Play("drop");//
-        //destroyRoom = true;
-    }
-    /*public void DestroyIfNecessary()
-    {
-        if (destroyRoom) { 
-            Destroy(previousRoom);
-            destroyRoom = false;
-        }
-    }*/
-    public void EnemyDied(GameObject enemy)
-    {
-        currentSpawnedEnemies.Remove(enemy);
-        if (currentSpawnedEnemies.Count == 0)
-        {
-            currentRoom.GetComponentInChildren<WallsHandler>().DeactivateWalls();
-            danger++;
-            PowerUp();
-            GenerateNextRoom();
         }
     }
     public void SpawnEnemies()
@@ -147,7 +152,6 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-       
         GameOverScreen.Instance.Enable(roomCount);
     }
     private void PowerUp()
