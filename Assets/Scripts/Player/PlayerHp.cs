@@ -19,4 +19,10 @@ public class PlayerHp : Hp
         health += PlayerStats.Instance.MaxHp - MaxHealth;
         MaxHealth = PlayerStats.Instance.MaxHp;
     }
+    public override void DoDmg(int Dmg)
+    {
+        PlayerStats.Instance.MinusAura();
+        base.DoDmg(Dmg);
+    }
+    
 }

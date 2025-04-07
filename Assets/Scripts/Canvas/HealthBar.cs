@@ -32,7 +32,9 @@ public class HealthBar : MonoBehaviour
         }
         if (!healthBarGraphics.activeSelf && hp.MaxHealth != hp.Health)
         {
-            healthBarGraphics.SetActive(true);
+            if (GetComponent<PlayerStats>() == null) {
+                healthBarGraphics.SetActive(true);
+            }
         }
        
         if (eHBSlider.value != hBSlider.value)

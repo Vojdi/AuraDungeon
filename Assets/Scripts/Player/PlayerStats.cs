@@ -24,7 +24,10 @@ public class PlayerStats : MonoBehaviour
     public float ProjectileSpeed => projectileSpeed;
 
     int aura;
-    public int Aura => aura;    
+    public int Aura => aura;
+
+    bool hitInRoom;
+    public bool HitInRoom => hitInRoom;
 
     private static PlayerStats instance;
     public static PlayerStats Instance => instance;
@@ -38,6 +41,7 @@ public class PlayerStats : MonoBehaviour
         reloadTime = 1f;
         projectileSpeed = 20f;
         aura = 0;
+        hitInRoom = false;
     }
     public static void ChangeAura(int value)
     {
@@ -70,4 +74,24 @@ public class PlayerStats : MonoBehaviour
         GetComponent<PlayerHp>().UpdateHp();
         
     }
+    public void AddAura()
+    {
+        if(aura != 10)
+        {
+            aura += 1;
+        }
+    }
+    public void MinusAura()
+    {
+        hitInRoom = true;
+        aura = 0;
+       
+    }
+    public void NewRoomHit()
+    {
+
+        hitInRoom = false;
+       
+    }
+
 }

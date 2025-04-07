@@ -21,9 +21,10 @@ public class GameOverScreen : MonoBehaviour
     }
     public void Enable(int roomCount)
     {
+       
         Time.timeScale = 0;
-        mainPanel.SetActive(true);
         healthBarGraphics.SetActive(false);
+        mainPanel.SetActive(true);
         roomCountPanel.text = $"You have successfully survived {roomCount.ToString()} rooms";
     }
     

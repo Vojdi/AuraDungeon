@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        roomCount = -1;
+        roomCount = 0;
         
     }
     private void LoadFirstRoom()
@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     }
     private void GenerateNextRoom()
     {
+        PlayerStats.Instance.NewRoomHit();
         roomCount++;
         previousRoom = currentRoom;
         GameObject roomType = rooms[Random.Range(0, rooms.Count)];
@@ -85,6 +86,10 @@ public class GameManager : MonoBehaviour
         {
             currentRoom.GetComponentInChildren<WallsHandler>().DeactivateWalls();
             danger++;
+            if (!PlayerStats.Instance.HitInRoom)
+            {
+                PlayerStats.Instance.AddAura();
+            }
             PowerUp();
             GenerateNextRoom();
         }

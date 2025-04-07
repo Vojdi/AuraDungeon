@@ -11,7 +11,7 @@ public abstract class Hp : MonoBehaviour
         health = MaxHealth;
     }
     
-    public void DoDmg(int Dmg)
+    public virtual void DoDmg(int Dmg)
     {
         health -= Dmg;
         if (health <= 0)
