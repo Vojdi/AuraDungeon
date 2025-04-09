@@ -7,6 +7,7 @@ public class PowerUpScreen : MonoBehaviour
     private static PowerUpScreen instance;
     public static PowerUpScreen Instance => instance;
     [SerializeField] GameObject healthBar;
+    [SerializeField] GameObject auraBar;
     [SerializeField] GameObject mainPanel;
     [SerializeField] List<Sprite> spriteList;
     [SerializeField] List<PowerUp> currentPowerUps;
@@ -45,6 +46,7 @@ public class PowerUpScreen : MonoBehaviour
         Time.timeScale = 0;
         mainPanel.SetActive(true);
         healthBar.SetActive(false);
+        auraBar.SetActive(false);
         foreach (var currentPowerUp in currentPowerUps) {
             currentPowerUp.SetUp();
         }
@@ -77,6 +79,7 @@ public class PowerUpScreen : MonoBehaviour
             PlayerStats.Instance.PowerUpMaxHp(value);
         }
         healthBar.SetActive(true);
+        auraBar.SetActive(true);
         Time.timeScale = 1;
     }
 }

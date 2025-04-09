@@ -32,7 +32,7 @@ public class HealthBar : MonoBehaviour
         }
         if (!healthBarGraphics.activeSelf && hp.MaxHealth != hp.Health)
         {
-            if (GetComponent<PlayerStats>() == null) {
+            if (transform.root.GetComponent<PlayerStats>() == null) {
                 healthBarGraphics.SetActive(true);
             }
         }

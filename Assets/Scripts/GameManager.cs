@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         PlayerStats.Instance.NewRoomHit();
         roomCount++;
         previousRoom = currentRoom;
-        GameObject roomType = rooms[Random.Range(0, rooms.Count)];
+        GameObject roomType = rooms[Random.Range(0, rooms.Count)]; 
         Vector3 loc = currentRoom.transform.position + possibleGeneratingValues[Random.Range(0, 2)];//
         loc.y += 50;//
         var instantiatedRoomType = Instantiate(roomType, loc, Quaternion.identity);//

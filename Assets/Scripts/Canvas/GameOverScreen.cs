@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameOverScreen : MonoBehaviour
 {
     [SerializeField] GameObject healthBarGraphics;
+    [SerializeField] GameObject auraBarGraphics;
     [SerializeField] GameObject mainPanel;
     [SerializeField] TMPro.TMP_Text roomCountPanel;
     private static GameOverScreen instance;
@@ -24,6 +25,7 @@ public class GameOverScreen : MonoBehaviour
        
         Time.timeScale = 0;
         healthBarGraphics.SetActive(false);
+        auraBarGraphics.SetActive(false);
         mainPanel.SetActive(true);
         roomCountPanel.text = $"You have successfully survived {roomCount.ToString()} rooms";
     }
