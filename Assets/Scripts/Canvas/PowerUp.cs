@@ -8,7 +8,7 @@ public class PowerUp : MonoBehaviour
     [SerializeField] Image powerUpImageObject;
     [SerializeField] TMPro.TMP_Text powerUpDescriptionObject;
 
-    private string powerUpType;
+    public string powerUpType;
     private float powerUpValue;
     public void SetUp()
     {

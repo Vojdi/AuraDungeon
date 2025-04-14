@@ -11,14 +11,16 @@ public class PowerUpScreen : MonoBehaviour
     [SerializeField] GameObject mainPanel;
     [SerializeField] List<Sprite> spriteList;
     [SerializeField] List<PowerUp> currentPowerUps;
-    List<PowerUpData> powerUps;
+
+    List<PowerUpData> currentPowerUpsToChoose = new List<PowerUpData>();
+    List<PowerUpData> powerUpsDatas;
    
     
 
     private void Start()
     {
         instance = this;
-        powerUps = new List<PowerUpData>() { 
+        powerUpsDatas = new List<PowerUpData>() { 
             new PowerUpData("attackSpeed", 10, spriteList[0], "+10% ATK SPD"),  new PowerUpData("attackSpeed", 10, spriteList[0], "+10% ATK SPD"),  new PowerUpData("attackSpeed", 10, spriteList[0], "+10% ATK SPD"),  new PowerUpData("attackSpeed", 10, spriteList[0], "+10% ATK SPD"),  new PowerUpData("attackSpeed", 10, spriteList[0], "+10% ATK SPD"),
             new PowerUpData("attackDamage", 10, spriteList[1], "+10% ATK DMG"), new PowerUpData("attackDamage", 10, spriteList[1], "+10% ATK DMG"), new PowerUpData("attackDamage", 10, spriteList[1], "+10% ATK DMG"), new PowerUpData("attackDamage", 10, spriteList[1], "+10% ATK DMG"), new PowerUpData("attackDamage", 10, spriteList[1], "+10% ATK DMG"),
             new PowerUpData("attackRange", 10, spriteList[2], "+10% ATK RANGE"), new PowerUpData("attackRange", 10, spriteList[2], "+10% ATK RANGE"), new PowerUpData("attackRange", 10, spriteList[2], "+10% ATK RANGE"), new PowerUpData("attackRange", 10, spriteList[2], "+10% ATK RANGE"), new PowerUpData("attackRange", 10, spriteList[2], "+10% ATK RANGE"),
@@ -47,14 +49,35 @@ public class PowerUpScreen : MonoBehaviour
         mainPanel.SetActive(true);
         healthBar.SetActive(false);
         auraBar.SetActive(false);
+        currentPowerUpsToChoose.Clear();    
         foreach (var currentPowerUp in currentPowerUps) {
             currentPowerUp.SetUp();
         }
     }
     public PowerUpData GetPowerUp()
     {
-        int randomIndex = Random.Range(0, powerUps.Count);
-        return powerUps[randomIndex];
+        int randomIndex;
+        bool foundNew = false; 
+        while (!foundNew)
+        {
+            randomIndex = Random.Range(0, powerUpsDatas.Count);
+            foundNew = true;
+
+            foreach (PowerUpData currentPowerUpToChoose in currentPowerUpsToChoose)
+            {
+                if (currentPowerUpToChoose.powerUpType == powerUpsDatas[randomIndex].powerUpType)
+                {
+                    foundNew = false; 
+                    break; 
+                }
+            }
+            if (foundNew)
+            {
+                currentPowerUpsToChoose.Add(powerUpsDatas[randomIndex]);
+                return powerUpsDatas[randomIndex];
+            }
+        }
+        return null;
     }
     public void SetChosenPowerUp(string type, float value)
     {
