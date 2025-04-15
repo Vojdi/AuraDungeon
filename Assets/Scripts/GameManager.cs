@@ -121,11 +121,13 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < currentRoomEnemiesToSpawn.Count; i++)
         {
             int indexOfClosest = getIndexOfClosestRoomCorner();
+            
             if (currentRoomCornerIndex == indexOfClosest)
             {
                 currentRoomCornerIndex++;
                 if (currentRoomCornerIndex >= roomCornerValues.Length)
                 {
+                    
                     currentRoomCornerIndex = 0;
                 }
             }
@@ -134,6 +136,7 @@ public class GameManager : MonoBehaviour
                 if (currentRoomCornerIndex >= roomCornerValues.Length)
                 {
                     currentRoomCornerIndex = 0;
+                    
                 }
             }
             Vector3 spawnPosition = currentRoom.transform.position + roomCornerValues[currentRoomCornerIndex];
@@ -150,11 +153,16 @@ public class GameManager : MonoBehaviour
         List<float> cornerDistances = new List<float>();
         for (int i = 0; i < roomCornerValues.Length; i++)
         {
-            float cornerDistance = Vector3.Distance(PlayerMovement.PlayerPosition, roomCornerValues[i]);
+            float cornerDistance = Vector3.Distance(PlayerMovement.PlayerPosition, currentRoom.transform.position + roomCornerValues[i]); 
+            Debug.Log(cornerDistance);//
             cornerDistances.Add(cornerDistance);
         }
+        Debug.Log("nigger" + cornerDistances.Min());
+
         return cornerDistances.IndexOf(cornerDistances.Min());
     }
+
+
     public void GameOver()
     {
         GameOverScreen.Instance.Enable(roomCount);
