@@ -153,16 +153,11 @@ public class GameManager : MonoBehaviour
         List<float> cornerDistances = new List<float>();
         for (int i = 0; i < roomCornerValues.Length; i++)
         {
-            float cornerDistance = Vector3.Distance(PlayerMovement.PlayerPosition, currentRoom.transform.position + roomCornerValues[i]); 
-            Debug.Log(cornerDistance);//
+            float cornerDistance = Vector3.Distance(PlayerMovement.PlayerPosition, currentRoom.transform.position + roomCornerValues[i]);    
             cornerDistances.Add(cornerDistance);
         }
-        Debug.Log("nigger" + cornerDistances.Min());
-
         return cornerDistances.IndexOf(cornerDistances.Min());
     }
-
-
     public void GameOver()
     {
         GameOverScreen.Instance.Enable(roomCount);

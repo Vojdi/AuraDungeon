@@ -3,23 +3,52 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] GameObject mainMenuGj;
+    [SerializeField] GameObject mainMenuOtherGraphicsGj;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] GameObject characterSelectionScreenGj;
+
+    [SerializeField] TMPro.TMP_Text[] buttons;
+    [SerializeField] TMPro.TMP_Text beginButtonText;
+    bool Chosen = false;
     public void StartGame()
     {
-        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+        if (Chosen)
+        {
+            SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+        }
     }
     public void ExitGame()
     {
         Application.Quit();
     }
+    public void GoToCharacterSelection()
+    {
+        mainMenuGj.SetActive(false);
+        mainMenuOtherGraphicsGj.SetActive(false);
+        characterSelectionScreenGj.SetActive(true);
+        foreach (var button in buttons)
+        {
+            button.text = "Choose";
+        }
+        Chosen = false;
+        beginButtonText.text = "Choose your Character first!";
+    }
+    public void ReturnToMainMenu()
+    {
+        mainMenuGj.SetActive(true);
+        mainMenuOtherGraphicsGj.SetActive(true);
+        characterSelectionScreenGj.SetActive(false);
+    }
+    public void ChooseButtonClicked(int buttonId)
+    {
+        foreach (var button in buttons) {
+            button.text = "Choose";
+        }
+        buttons[buttonId].text = "Chosen";
+        PlayerPrefs.SetInt("charId", buttonId);
+        Chosen = true;
+        beginButtonText.text = "Begin";
+    }
+
 }

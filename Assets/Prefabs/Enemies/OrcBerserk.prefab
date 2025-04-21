@@ -313,10 +313,10 @@ MonoBehaviour:
   maxHp: 80
   auraToughness: 8
   sightRange: 25
-  movementSpeed: 3
+  movementSpeed: 4
   reloadTime: 1
   reach: 6
-  damage: 30
+  damage: 40
   dangerValue: 3
   projectileSpeed: 0
   projectileRange: 0
