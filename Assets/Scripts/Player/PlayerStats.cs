@@ -51,7 +51,6 @@ public class PlayerStats : MonoBehaviour
         movementSpeed = statPresets[charId].moveSpeed;
         reloadTime = statPresets[charId].reload;
         projectileSpeed = statPresets[charId].projSpeed;
-        Debug.Log(range);
         aura = 0;
         hitInRoom = false;
     }
