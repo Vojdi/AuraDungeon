@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] TMPro.TMP_Text[] texts;
     [SerializeField] TMPro.TMP_Text beginButtonText;
+    [SerializeField] Button[] buttons;
+
     bool Chosen = false;
     public void StartGame()
     {
@@ -42,13 +45,17 @@ public class MainMenu : MonoBehaviour
     }
     public void ChooseButtonClicked(int buttonId)
     {
-        foreach (var button in texts) {
-            button.text = "";
+        
+            
+        
+        foreach (var text in texts) {
+            text.text = "";
         }
         texts[buttonId].text = "Selected";
         PlayerPrefs.SetInt("charId", buttonId);
         Chosen = true;
         beginButtonText.text = "Begin";
+        buttons[buttonId].Select();
     }
 
 }
