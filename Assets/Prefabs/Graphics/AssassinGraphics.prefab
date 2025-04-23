@@ -2740,6 +2740,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1434099760747128038}
+  - component: {fileID: -7203511534261079996}
   m_Layer: 0
   m_Name: AssassinGraphics
   m_TagString: Untagged
@@ -2767,6 +2768,20 @@ Transform:
   - {fileID: 4537273161532755361}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7203511534261079996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047630597149649889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e843ea64230c041ba4719da063aa45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  legs: {fileID: 9097066328815494515}
+  hands: {fileID: 7561806055975148128}
 --- !u!1 &9097066328815494515
 GameObject:
   m_ObjectHideFlags: 0

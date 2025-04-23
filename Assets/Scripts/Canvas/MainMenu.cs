@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] GameObject characterSelectionScreenGj;
 
-    [SerializeField] TMPro.TMP_Text[] buttons;
+    [SerializeField] TMPro.TMP_Text[] texts;
     [SerializeField] TMPro.TMP_Text beginButtonText;
     bool Chosen = false;
     public void StartGame()
@@ -27,9 +27,9 @@ public class MainMenu : MonoBehaviour
         mainMenuGj.SetActive(false);
         mainMenuOtherGraphicsGj.SetActive(false);
         characterSelectionScreenGj.SetActive(true);
-        foreach (var button in buttons)
+        foreach (var button in texts)
         {
-            button.text = "Choose";
+            button.text = "";
         }
         Chosen = false;
         beginButtonText.text = "Choose your Character first!";
@@ -42,10 +42,10 @@ public class MainMenu : MonoBehaviour
     }
     public void ChooseButtonClicked(int buttonId)
     {
-        foreach (var button in buttons) {
-            button.text = "Choose";
+        foreach (var button in texts) {
+            button.text = "";
         }
-        buttons[buttonId].text = "Chosen";
+        texts[buttonId].text = "Selected";
         PlayerPrefs.SetInt("charId", buttonId);
         Chosen = true;
         beginButtonText.text = "Begin";

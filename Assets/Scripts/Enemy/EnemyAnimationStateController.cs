@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class EnemyAnimationStateController : AnimationStateController
 {
+    [SerializeField] protected GameObject legs;
+    [SerializeField] protected GameObject hands;
     EnemyAI eAI;
     EnemyStats eS;
-    override protected void Start()
+    void Start()
     {
-        base.Start();
+        legsAnimator = legs.GetComponent<Animator>();
+        handsAnimator = hands.GetComponent<Animator>();
         eAI = GetComponent<EnemyAI>();
         eS = GetComponent<EnemyStats>();
     }

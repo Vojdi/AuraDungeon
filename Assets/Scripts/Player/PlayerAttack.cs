@@ -6,7 +6,8 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] Material[] lineMaterials;
     [SerializeField] Transform projectileSpawnTransform;
-    [SerializeField] GameObject projectilePrefab;   
+    [SerializeField] GameObject[] projectileTypes;
+    GameObject projectilePrefab;   
     public GameObject ProjectilePrefab => projectilePrefab;
     LineRenderer lineRenderer;
     public List<PlayerProjectile> projectiles;
@@ -17,11 +18,12 @@ public class PlayerAttack : MonoBehaviour
     bool reloaded;
     void Start()
     {
+        projectilePrefab = projectileTypes[PlayerPrefs.GetInt("charId")];
         lineRenderer = GetComponent<LineRenderer>();
         playerAnimationStateController = GetComponent<PlayerAnimationStateController>();
         reloaded = true;
 
-        var projectile = GetComponent<PlayerAttack>().ProjectilePrefab.GetComponent<PlayerProjectile>();
+        var projectile = ProjectilePrefab.GetComponent<PlayerProjectile>();
         for (int i = 0; i < 5; i++)
         {
             var prj = Instantiate(projectile, Waste.Instance.transform);

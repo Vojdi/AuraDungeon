@@ -3,18 +3,11 @@ using UnityEngine.Rendering;
 
 public class AnimationStateController : MonoBehaviour
 {
-    [SerializeField] protected GameObject legs;
-    [SerializeField] protected GameObject hands;
     protected Animator legsAnimator;
     protected Animator handsAnimator;
     protected float movementSpeed;
     protected float reloadRate;
 
-    protected virtual void Start()
-    {
-        legsAnimator = legs.GetComponent<Animator>();
-        handsAnimator = hands.GetComponent<Animator>();
-    }
     protected virtual void RefreshValues()
     {
 

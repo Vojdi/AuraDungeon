@@ -11,7 +11,7 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         player = FindAnyObjectByType<PlayerMovement>().transform;
-        offset = new Vector3(-16.50f, 15.00f, 16.50f); //transform.position - player.position;
+        offset = new Vector3(-30f, 25.00f, 30f); //transform.position - player.position;
     }
 
     void LateUpdate()

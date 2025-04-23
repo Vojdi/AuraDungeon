@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     static bool isWalking;
     public static bool IsWalking => isWalking;
+   
     
     Vector3 moveDirection;
     private void Start()
@@ -59,5 +61,5 @@ public class PlayerMovement : MonoBehaviour
 
         moveDirection.y = velocity;
     }
-    
+   
 }
