@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     bool currentBoss = false;
 
     public static int EnemyEnhancer = 0;
+    int currencyEarned = 0;
 
     private void Awake()
     {
@@ -41,12 +42,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         roomCount = 0;
+        GenerateNextRoom();
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P)) {
             Instantiate(Bosses[0],new Vector3(0,1,0), Quaternion.identity);
         }
+        Debug.Log(roomCount);
     }
     private void LoadFirstRoom()
     {
@@ -55,12 +58,13 @@ public class GameManager : MonoBehaviour
         currentRoom = instantiatedRoom;
         Time.timeScale = 1;
         instantiatedRoom.GetComponentInChildren<WallsHandler>().DeactivateWalls();
-        GenerateNextRoom();
+        //GenerateNextRoom();
     }
     private void GenerateNextRoom()
     {
         PlayerStats.Instance.NewRoomHit();
         roomCount++;
+        MiscInfoUpdate.Instance.UpdateRoomCount(roomCount - 1);
         previousRoom = currentRoom;
         GameObject roomType = rooms[Random.Range(0, rooms.Count)]; 
         Vector3 loc = currentRoom.transform.position + possibleGeneratingValues[Random.Range(0, 2)];//
@@ -69,7 +73,7 @@ public class GameManager : MonoBehaviour
         instantiatedRoomType.GetComponent<Animator>().Play("drop");//
         //var instantiatedRoomType = Instantiate(roomType, currentRoom.transform.position + possibleGeneratingValues[Random.Range(0, 2)], Quaternion.identity);
         currentRoom = instantiatedRoomType;
-        if (roomCount % 5 == 0) {
+        if ((roomCount) % 5 == 0) {
 
             CalculateSpawnBoss();
         }
@@ -103,8 +107,11 @@ public class GameManager : MonoBehaviour
                 var  php = PlayerStats.Instance.gameObject.GetComponent<PlayerHp>();
                 php.DoDmg(-(php.MaxHealth - php.Health));
                 EnemyEnhancer++;
+                MiscInfoUpdate.Instance.UpdateEnhanceCount(EnemyEnhancer);
                 danger -= 2;
-                //PowerUpEnemies
+                currentBoss = false;
+                currencyEarned++;
+                
             }
             currentRoom.GetComponentInChildren<WallsHandler>().DeactivateWalls();
             danger++;
@@ -189,7 +196,7 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        GameOverScreen.Instance.Enable(roomCount);
+        GameOverScreen.Instance.Enable(roomCount - 1, currencyEarned);
     }
     private void PowerUp()
     {

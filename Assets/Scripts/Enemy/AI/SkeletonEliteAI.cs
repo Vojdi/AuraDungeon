@@ -15,7 +15,7 @@ public class SkeletonEliteAI : MonoBehaviour
 
    
     private float moveCooldownTimer = 0f;
-    private float moveCooldownDuration = 0.5f;
+    private float moveCooldownDuration = 0.3f;
 
     public static int AttackType { get; private set; }
     public bool IsWalking => agent.velocity.magnitude > 0.1f;

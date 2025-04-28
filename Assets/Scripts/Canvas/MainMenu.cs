@@ -8,12 +8,18 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject mainMenuOtherGraphicsGj;
 
     [SerializeField] GameObject characterSelectionScreenGj;
-
     [SerializeField] TMPro.TMP_Text[] texts;
     [SerializeField] TMPro.TMP_Text beginButtonText;
     [SerializeField] Button[] buttons;
 
-    bool Chosen = false;
+    [SerializeField] GameObject shopGj;
+    [SerializeField] TMPro.TMP_Text auronsText;
+    [SerializeField] TMPro.TMP_Text[] shopButtons;
+    [SerializeField] GameObject[] miscStuff; 
+
+
+    int money;
+    bool chosen = false;
 
     // Your color settings
     Color selectedColor = new Color32(0xF5, 0xF5, 0xF5, 0xFF);   // #F5F5F5
@@ -21,7 +27,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        if (Chosen)
+        if (chosen)
         {
             SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
         }
@@ -34,6 +40,13 @@ public class MainMenu : MonoBehaviour
 
     public void GoToCharacterSelection()
     {
+        foreach (var button in buttons)
+        {
+            var colors = button.colors; // copy the full struct first
+            colors.normalColor = deselectedColor; // modify the copy
+            button.colors = colors; // assign the modified struct back
+        }
+
         mainMenuGj.SetActive(false);
         mainMenuOtherGraphicsGj.SetActive(false);
         characterSelectionScreenGj.SetActive(true);
@@ -41,8 +54,26 @@ public class MainMenu : MonoBehaviour
         {
             button.text = "";
         }
-        Chosen = false;
+        chosen = false;
         beginButtonText.text = "Choose your Character first!";
+        if(PlayerPrefs.GetString("Thief") != "true")
+        {
+            buttons[1].interactable = false;
+            texts[1].text = "Locked";
+        }
+        else
+        {
+            buttons[1].interactable = true;
+        }
+        if (PlayerPrefs.GetString("Heavy") != "true")
+        {
+            buttons[2].interactable = false;
+            texts[2].text = "Locked";
+        }
+        else
+        {
+            buttons[2].interactable = true;
+        }
     }
 
     public void ReturnToMainMenu()
@@ -50,6 +81,7 @@ public class MainMenu : MonoBehaviour
         mainMenuGj.SetActive(true);
         mainMenuOtherGraphicsGj.SetActive(true);
         characterSelectionScreenGj.SetActive(false);
+        shopGj.SetActive(false);
     }
 
     public void ChooseButtonClicked(int buttonId)
@@ -63,7 +95,7 @@ public class MainMenu : MonoBehaviour
         // Set selected label
         texts[buttonId].text = "Selected";
         PlayerPrefs.SetInt("charId", buttonId);
-        Chosen = true;
+        chosen = true;
         beginButtonText.text = "Begin";
 
         // Update button colors manually
@@ -74,4 +106,52 @@ public class MainMenu : MonoBehaviour
             buttons[i].colors = colors;
         }
     }
+    public void GoToShop()
+    {
+        
+        mainMenuGj.SetActive(false);
+        mainMenuOtherGraphicsGj.SetActive(false);
+        shopGj.SetActive(true);
+        money = PlayerPrefs.GetInt("Money");
+        auronsText.text = money.ToString();
+        if (PlayerPrefs.GetString("Thief") == "true")
+        {
+            shopButtons[0].text = "Owned";
+            miscStuff[0].SetActive(false);
+            shopButtons[0].GetComponent<Button>().interactable = false;
+        }
+        if (PlayerPrefs.GetString("Heavy") == "true")
+        {
+            shopButtons[1].text = "Owned";
+            miscStuff[1].SetActive(false);
+            shopButtons[1].GetComponent<Button>().interactable = false;
+        }
+    }
+    public void BuyThief()
+    {
+        if(money >= 20)
+        {
+            money -= 20;
+            auronsText.text = money.ToString();
+            PlayerPrefs.SetInt("Money", money);
+            PlayerPrefs.SetString("Thief", "true");
+            shopButtons[0].text = "Owned";
+            miscStuff[0].SetActive(false);
+            shopButtons[0].GetComponent<Button>().interactable = false;
+        }
+    }
+    public void BuyHeavy()
+    {
+        if (money >= 20)
+        {
+            money -= 20;
+            auronsText.text = money.ToString();
+            PlayerPrefs.SetInt("Money", money);
+            PlayerPrefs.SetString("Heavy", "true");
+            shopButtons[1].text = "Owned";
+            miscStuff[1].SetActive(false);
+            shopButtons[1].GetComponent<Button>().interactable = false;
+        }
+    }
+
 }

@@ -35,9 +35,9 @@ public class PlayerStats : MonoBehaviour
    
     private static (int maxHp, int damage, float range, float moveSpeed, float reload, float projSpeed)[] statPresets =
     {
-        (100, 15, 20f, 7.5f, 1.2f, 20f),   
-        (50, 10, 15f, 9.5f, 0.7f, 30f),  
-        (150, 20, 30f, 5.5f, 1.7f, 10f)   
+        (100, 14, 17f, 7.5f, 1.2f, 20f),   
+        (65, 11, 14f, 9.5f, 0.6f, 35f),  
+        (140, 20, 25f, 5.5f, 1.7f, 15f)   
     };
 
     void Awake()

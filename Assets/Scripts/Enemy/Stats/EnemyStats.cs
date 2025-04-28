@@ -47,12 +47,15 @@ public class EnemyStats : MonoBehaviour
     {
         int enhancer = GameManager.EnemyEnhancer;
 
-        maxHp += Mathf.RoundToInt(maxHp * 0.2f * enhancer);     // +20% per enhancer
+        maxHp += Mathf.RoundToInt(maxHp * 0.3f * enhancer);     // +20% per enhancer
         sightRange += Mathf.RoundToInt(sightRange * 0.15f * enhancer); // +15% per enhancer
-        movementSpeed += movementSpeed * 0.10f * enhancer;  // floats are fine
+        movementSpeed += movementSpeed * 0.15f * enhancer;  // floats are fine
         reloadTime -= reloadTime * 0.15f * enhancer;        // floats are fine
-        damage += Mathf.RoundToInt(damage * 0.2f * enhancer);   // +20% per enhancer
+        damage += Mathf.RoundToInt(damage * 0.1f * enhancer);   // +20% per enhancer
+        projectileSpeed += projectileSpeed * 0.10f * enhancer;
+        projectileRange += projectileRange * 0.10f * enhancer;
     }
 
 
 }
+    
