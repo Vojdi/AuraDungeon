@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
 
     [SerializeField] List<GameObject> rooms;
+    [SerializeField] List<GameObject> Bosses;
 
     public GameObject currentRoom;
     GameObject previousRoom;
@@ -27,18 +28,25 @@ public class GameManager : MonoBehaviour
     int roomCount;
     int danger = 2;
     bool destroyRoom = false;
+    bool currentBoss = false;
+
+    public static int EnemyEnhancer = 0;
 
     private void Awake()
     {
         instance = this;
         Time.timeScale = 0;
         LoadFirstRoom();
-
     }
     void Start()
     {
         roomCount = 0;
-        
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P)) {
+            Instantiate(Bosses[0],new Vector3(0,1,0), Quaternion.identity);
+        }
     }
     private void LoadFirstRoom()
     {
@@ -61,9 +69,15 @@ public class GameManager : MonoBehaviour
         instantiatedRoomType.GetComponent<Animator>().Play("drop");//
         //var instantiatedRoomType = Instantiate(roomType, currentRoom.transform.position + possibleGeneratingValues[Random.Range(0, 2)], Quaternion.identity);
         currentRoom = instantiatedRoomType;
-        CalculateSpawnEnemies();
+        if (roomCount % 5 == 0) {
+
+            CalculateSpawnBoss();
+        }
+        else
+        {
+            CalculateSpawnEnemies();
+        }   
     }
-    
     public void DropPrevRoom()
     {
         //Destroy(previousRoom);
@@ -84,6 +98,14 @@ public class GameManager : MonoBehaviour
         currentSpawnedEnemies.Remove(enemy);
         if (currentSpawnedEnemies.Count == 0)
         {
+            if (currentBoss)
+            {
+                var  php = PlayerStats.Instance.gameObject.GetComponent<PlayerHp>();
+                php.DoDmg(-(php.MaxHealth - php.Health));
+                EnemyEnhancer++;
+                danger -= 2;
+                //PowerUpEnemies
+            }
             currentRoom.GetComponentInChildren<WallsHandler>().DeactivateWalls();
             danger++;
             if (!PlayerStats.Instance.HitInRoom)
@@ -112,12 +134,19 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    private void CalculateSpawnBoss()
+    {
+        EnemyStats potentialBoss = Bosses[Random.Range(0, Bosses.Count)].GetComponent<EnemyStats>();
+        currentRoomEnemiesToSpawn.Add(potentialBoss);
+        currentBoss = true;
+    }
     public void SpawnEnemies()
     {
         StartCoroutine(SpawnRoomEnemy());
     }
     private IEnumerator SpawnRoomEnemy()
     {
+
         for (int i = 0; i < currentRoomEnemiesToSpawn.Count; i++)
         {
             int indexOfClosest = getIndexOfClosestRoomCorner();

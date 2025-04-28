@@ -50,8 +50,9 @@ public class EnemyProjectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameObject collision = other.transform.root.gameObject;
-        if (collision.transform.root.GetComponent<EnemyAI>() == null)
+        if (collision.transform.root.GetComponent<EnemyStats>() == null)
         {
+            Debug.Log(other);
             var php = other.gameObject.GetComponent<PlayerHp>();
             if (php != null)
             {

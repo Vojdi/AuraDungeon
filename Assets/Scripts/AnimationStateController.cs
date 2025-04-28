@@ -36,7 +36,7 @@ public class AnimationStateController : MonoBehaviour
         legsAnimator.SetBool("IsWalking", false);
         handsAnimator.SetBool("IsWalking", false);
     }
-    public void InitiateAttack()
+    public virtual void InitiateAttack()
     {
         ApplyAttackSpeedMultiplier();
         handsAnimator.SetBool("IsAttacking", true);

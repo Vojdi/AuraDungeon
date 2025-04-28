@@ -42,4 +42,17 @@ public class EnemyStats : MonoBehaviour
     [SerializeField]
     protected float projectileRange;
     public float ProjectileRange => projectileRange;
+
+    private void Awake()
+    {
+        int enhancer = GameManager.EnemyEnhancer;
+
+        maxHp += Mathf.RoundToInt(maxHp * 0.2f * enhancer);     // +20% per enhancer
+        sightRange += Mathf.RoundToInt(sightRange * 0.15f * enhancer); // +15% per enhancer
+        movementSpeed += movementSpeed * 0.10f * enhancer;  // floats are fine
+        reloadTime -= reloadTime * 0.15f * enhancer;        // floats are fine
+        damage += Mathf.RoundToInt(damage * 0.2f * enhancer);   // +20% per enhancer
+    }
+
+
 }

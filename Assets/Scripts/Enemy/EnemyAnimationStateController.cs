@@ -7,14 +7,14 @@ public class EnemyAnimationStateController : AnimationStateController
     [SerializeField] protected GameObject hands;
     EnemyAI eAI;
     EnemyStats eS;
-    void Start()
+    protected virtual void Start()
     {
         legsAnimator = legs.GetComponent<Animator>();
         handsAnimator = hands.GetComponent<Animator>();
         eAI = GetComponent<EnemyAI>();
         eS = GetComponent<EnemyStats>();
     }
-    void Update()
+    protected virtual void Update()
     {
         RefreshValues();
         if (eAI.IsWalking)

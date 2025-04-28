@@ -315,7 +315,7 @@ MonoBehaviour:
   sightRange: 25
   movementSpeed: 4
   reloadTime: 1
-  reach: 6
+  reach: 5
   damage: 40
   dangerValue: 3
   projectileSpeed: 0

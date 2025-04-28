@@ -3632,6 +3632,8 @@ MonoBehaviour:
   - {fileID: 8105172054755112045, guid: c8ab1b8077de27840887c868129a5222, type: 3}
   - {fileID: 8105172054755112045, guid: fc53a200b9ee8ad41b9c735f9d703d0e, type: 3}
   - {fileID: 8105172054755112045, guid: 5b025530c0c7a174c8967f6d42e16c7b, type: 3}
+  Bosses:
+  - {fileID: 3891238291823710242, guid: 0ffb4ac0ae427cd4fb879cc16f7cf80b, type: 3}
   currentRoom: {fileID: 0}
   possibleEnemiesToGenerate:
   - {fileID: 6270657851026048634, guid: 2f0e28b80b05778469e249be6c4d43a7, type: 3}
