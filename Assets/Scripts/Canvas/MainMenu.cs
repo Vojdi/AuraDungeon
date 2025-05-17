@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,13 +11,20 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] GameObject characterSelectionScreenGj;
     [SerializeField] TMPro.TMP_Text[] texts;
+    [SerializeField] TMPro.TMP_Text checkBoxText;
+
+    [SerializeField] Toggle immortalityCheckBox;
     [SerializeField] TMPro.TMP_Text beginButtonText;
     [SerializeField] Button[] buttons;
 
     [SerializeField] GameObject shopGj;
     [SerializeField] TMPro.TMP_Text auronsText;
     [SerializeField] TMPro.TMP_Text[] shopButtons;
-    [SerializeField] GameObject[] miscStuff; 
+    [SerializeField] GameObject[] miscStuff;
+
+    string lettersPressed = "";
+    string lettersNeeded = "skibidi";
+    
 
 
     int money;
@@ -25,10 +34,50 @@ public class MainMenu : MonoBehaviour
     Color selectedColor = new Color32(0xF5, 0xF5, 0xF5, 0xFF);   // #F5F5F5
     Color deselectedColor = new Color32(0x6B, 0x6A, 0x6A, 0xFF); // #6B6A6A
 
+    void Update()
+    {
+        foreach (char c in lettersNeeded)
+        {
+            if (Input.GetKeyDown(c.ToString()))
+            {
+                lettersPressed += c;
+
+                if (lettersPressed.Length > lettersNeeded.Length)
+                {
+                    lettersPressed = lettersPressed.Substring(lettersPressed.Length - lettersNeeded.Length);
+                }
+
+                if (lettersPressed == lettersNeeded)
+                {
+                    TriggerCombo();
+                    lettersPressed = ""; 
+                }
+
+                break; 
+            }
+        }
+    }
+
+    private void TriggerCombo()
+    {
+        money = PlayerPrefs.GetInt("Money");
+        money += 200;
+        PlayerPrefs.SetInt("Money", money);
+        auronsText.text = money.ToString();
+    }
+
     public void StartGame()
     {
         if (chosen)
         {
+            if(immortalityCheckBox.isOn == true)
+            {
+                PlayerPrefs.SetString("Immortality", "true");
+            }
+            else
+            {
+                PlayerPrefs.SetString("Immortality", "false");
+            }
             SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
         }
     }
@@ -40,6 +89,7 @@ public class MainMenu : MonoBehaviour
 
     public void GoToCharacterSelection()
     {
+
         foreach (var button in buttons)
         {
             var colors = button.colors; // copy the full struct first
@@ -54,6 +104,7 @@ public class MainMenu : MonoBehaviour
         {
             button.text = "";
         }
+       
         chosen = false;
         beginButtonText.text = "Choose your Character first!";
         if(PlayerPrefs.GetString("Thief") != "true")
@@ -74,6 +125,16 @@ public class MainMenu : MonoBehaviour
         {
             buttons[2].interactable = true;
         }
+        if(PlayerPrefs.GetString("ImmortalityOwned") != "true")
+        {
+            checkBoxText.text = "Locked";
+            immortalityCheckBox.interactable = false;
+        }
+        else
+        {
+            checkBoxText.text = "Immortality";
+            immortalityCheckBox.interactable = true;
+        }
     }
 
     public void ReturnToMainMenu()
@@ -89,7 +150,10 @@ public class MainMenu : MonoBehaviour
         // Clear all selection text labels
         for (int i = 0; i < texts.Length; i++)
         {
-            texts[i].text = "";
+            if(texts[i].text != "Locked")
+            {
+                texts[i].text = "";
+            }
         }
 
         // Set selected label
@@ -126,6 +190,12 @@ public class MainMenu : MonoBehaviour
             miscStuff[1].SetActive(false);
             shopButtons[1].GetComponent<Button>().interactable = false;
         }
+        if (PlayerPrefs.GetString("ImmortalityOwned") == "true")
+        {
+            shopButtons[2].text = "Owned";
+            miscStuff[2].SetActive(false);
+            shopButtons[2].GetComponent<Button>().interactable = false;
+        }
     }
     public void BuyThief()
     {
@@ -153,5 +223,17 @@ public class MainMenu : MonoBehaviour
             shopButtons[1].GetComponent<Button>().interactable = false;
         }
     }
-
+    public void BuyImmortality()
+    {
+        if (money >= 50)
+        {
+            money -= 50;
+            auronsText.text = money.ToString();
+            PlayerPrefs.SetInt("Money", money);
+            PlayerPrefs.SetString("ImmortalityOwned", "true");
+            shopButtons[2].text = "Owned";
+            miscStuff[2].SetActive(false);
+            shopButtons[2].GetComponent<Button>().interactable = false;
+        }
+    }
 }

@@ -4,9 +4,17 @@ using UnityEngine.Rendering;
 
 public class PlayerHp : Hp
 {
-    
+    bool immortal;
     override protected void Start()
     {
+        if(PlayerPrefs.GetString("Immortality") == "true")
+        {
+            immortal = true;
+        }
+        else
+        {
+            immortal = false;
+        }
         MaxHealth = PlayerStats.Instance.MaxHp;
         base.Start();
     }
@@ -21,8 +29,10 @@ public class PlayerHp : Hp
     }
     public override void DoDmg(int Dmg)
     {
-        PlayerStats.Instance.MinusAura();
-        base.DoDmg(Dmg);
+        if (!immortal)
+        {
+            PlayerStats.Instance.MinusAura();
+            base.DoDmg(Dmg);
+        }
     }
-    
 }

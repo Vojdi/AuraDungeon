@@ -52,7 +52,6 @@ public class EnemyProjectile : MonoBehaviour
         GameObject collision = other.transform.root.gameObject;
         if (collision.transform.root.GetComponent<EnemyStats>() == null)
         {
-            Debug.Log(other);
             var php = other.gameObject.GetComponent<PlayerHp>();
             if (php != null)
             {

@@ -25,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
         ApplyGravity();
         characterController.Move(moveDirection * Time.deltaTime * PlayerStats.Instance.MovementSpeed);
         playerPosition = transform.position;
+        if (playerPosition.y <= -10)
+        {
+            GameManager.Instance.GameOver();
+        }
     }
 
     void GetDirection()

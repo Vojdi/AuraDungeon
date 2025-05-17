@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P)) {
             Instantiate(Bosses[0],new Vector3(0,1,0), Quaternion.identity);
         }
-        Debug.Log(roomCount);
     }
     private void LoadFirstRoom()
     {
