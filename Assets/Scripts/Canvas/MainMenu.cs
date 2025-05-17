@@ -132,7 +132,7 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            checkBoxText.text = "Immortality";
+            checkBoxText.text = "immortality";
             immortalityCheckBox.interactable = true;
         }
     }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 957132a8540901d45bf30b5a8d0b61d9
+guid: e688cb6d18073304c867e9105eadc267
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Pixellari
+  - VT323
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
