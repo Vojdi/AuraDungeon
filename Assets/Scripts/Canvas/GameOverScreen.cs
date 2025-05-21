@@ -24,6 +24,7 @@ public class GameOverScreen : MonoBehaviour
     {
        
         Time.timeScale = 0;
+        AudioManager.Instance.GameOver();
         foreach (var u in unnecessary) {
             u.SetActive(false); 
         }
