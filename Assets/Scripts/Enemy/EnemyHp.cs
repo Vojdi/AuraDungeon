@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyHp : Hp
 {
-    EnemyStats stats;
+    EnemyStats stats; 
     override protected void Start()
     {
         stats = GetComponent<EnemyStats>();

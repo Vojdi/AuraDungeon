@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        EnemyEnhancer = 0;
         roomCount = 0;
         GenerateNextRoom();
     }
