@@ -68,8 +68,8 @@ public class GameManager : MonoBehaviour
         roomCount++;
         MiscInfoUpdate.Instance.UpdateRoomCount(roomCount - 1);
         previousRoom = currentRoom;
-        //GameObject roomType = rooms[Random.Range(0, rooms.Count)];
-        GameObject roomType = rooms[12];
+        GameObject roomType = rooms[Random.Range(0, rooms.Count)];
+        //GameObject roomType = rooms[12];
         Vector3 loc = currentRoom.transform.position + possibleGeneratingValues[Random.Range(0, 2)];//
         loc.y += 50;//
         var instantiatedRoomType = Instantiate(roomType, loc, Quaternion.identity);//
