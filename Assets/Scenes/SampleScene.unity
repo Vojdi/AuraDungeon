@@ -3179,6 +3179,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4a13ea1f7d654a2418b1cf4c34bcd679, type: 3}
   - {fileID: 8300000, guid: c699a28efb2e86e43a425d3ac0de02df, type: 3}
   - {fileID: 8300000, guid: 05076f59a4ed96440a2783e15dd223e9, type: 3}
+  musicQueue: []
 --- !u!1 &1212770256
 GameObject:
   m_ObjectHideFlags: 0
@@ -3825,6 +3826,8 @@ MonoBehaviour:
   - {fileID: -295652880383436285, guid: 8bf7b2b8befa9e942bb1e120a4e14208, type: 3}
   - {fileID: -2282098917457730964, guid: aa78ea374e3bedf439642d77be280fac, type: 3}
   - {fileID: -7639456485819793364, guid: 018ef5892a08a7b46843eabc32c4ce24, type: 3}
+  spawnParticle: {fileID: 4519720491190478925, guid: 7b177217079d3f74f8b9f1972e8ac427,
+    type: 3}
 --- !u!4 &1629401596
 Transform:
   m_ObjectHideFlags: 0

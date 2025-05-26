@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     List<EnemyStats> currentRoomEnemiesToSpawn = new List<EnemyStats>();
     List<GameObject> currentSpawnedEnemies = new List<GameObject>();
 
+    [SerializeField] GameObject spawnParticle;
+
     int roomCount;
     int danger = 2;
     bool destroyRoom = false;
@@ -66,7 +68,8 @@ public class GameManager : MonoBehaviour
         roomCount++;
         MiscInfoUpdate.Instance.UpdateRoomCount(roomCount - 1);
         previousRoom = currentRoom;
-        GameObject roomType = rooms[Random.Range(0, rooms.Count)]; 
+        //GameObject roomType = rooms[Random.Range(0, rooms.Count)];
+        GameObject roomType = rooms[12];
         Vector3 loc = currentRoom.transform.position + possibleGeneratingValues[Random.Range(0, 2)];//
         loc.y += 50;//
         var instantiatedRoomType = Instantiate(roomType, loc, Quaternion.identity);//
@@ -178,6 +181,8 @@ public class GameManager : MonoBehaviour
             Vector3 spawnPosition = currentRoom.transform.position + roomCornerValues[currentRoomCornerIndex];
             spawnPosition.y = 1;
             var en = Instantiate(currentRoomEnemiesToSpawn[i].gameObject, spawnPosition, Quaternion.identity);
+            Instantiate(spawnParticle, new Vector3(spawnPosition.x,spawnPosition.y + 1, spawnPosition.z), Quaternion.identity, en.transform);
+
             currentSpawnedEnemies.Add(en);
             currentRoomCornerIndex++;
             yield return new WaitForSeconds(1);
