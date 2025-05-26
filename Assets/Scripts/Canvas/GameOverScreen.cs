@@ -22,12 +22,13 @@ public class GameOverScreen : MonoBehaviour
     }
     public void Enable(int roomCount, int currencyEarned)
     {
-       
+        
         Time.timeScale = 0;
         AudioManager.Instance.GameOver();
         foreach (var u in unnecessary) {
             u.SetActive(false); 
         }
+        PlayerPrefs.SetInt("MostRooms", roomCount + 1);
         mainPanel.SetActive(true);
         roomCountPanel.text = $"You have successfully survived {roomCount.ToString()} rooms";
         if(currencyEarned == 1)
