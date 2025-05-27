@@ -3735,6 +3735,7 @@ MonoBehaviour:
   checkBoxText: {fileID: 1262825057}
   immortalityCheckBox: {fileID: 1370654940}
   beginButtonText: {fileID: 1117189582}
+  beginButton: {fileID: 1117189581}
   buttons:
   - {fileID: 1132578826}
   - {fileID: 738356802}
@@ -5376,7 +5377,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 4c92785869c97304982cc8a7d41fb8c9, type: 3}
   m_Resource: {fileID: 8300000, guid: 4c92785869c97304982cc8a7d41fb8c9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0

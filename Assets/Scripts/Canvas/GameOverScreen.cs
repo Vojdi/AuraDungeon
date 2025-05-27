@@ -28,7 +28,10 @@ public class GameOverScreen : MonoBehaviour
         foreach (var u in unnecessary) {
             u.SetActive(false); 
         }
-        PlayerPrefs.SetInt("MostRooms", roomCount + 1);
+        if(roomCount + 1 > PlayerPrefs.GetInt("MostRooms"))
+        {
+            PlayerPrefs.SetInt("MostRooms", roomCount + 1);
+        }
         mainPanel.SetActive(true);
         roomCountPanel.text = $"You have successfully survived {roomCount.ToString()} rooms";
         if(currencyEarned == 1)

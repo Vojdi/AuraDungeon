@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d6a92aab9b10e48ba64c17b6d2caa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 220
+  maxHp: 300
   auraToughness: 12
   sightRange: 1000
   movementSpeed: 7

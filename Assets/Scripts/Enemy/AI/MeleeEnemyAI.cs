@@ -39,7 +39,7 @@ public class MeleeEnemyAI : EnemyAI
         if (enemyPlayerDistance < es.SightRange || isTriggered)
         {
             agent.autoBraking = false;
-            if (es.AuraToughness >= PlayerStats.Instance.Aura)
+            if (es.AuraToughness > PlayerStats.Instance.Aura)
             {//Enemy Followuje Hrace
                 AttackState(enemyPlayerDistance);
             }

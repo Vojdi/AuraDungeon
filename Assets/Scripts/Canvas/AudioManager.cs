@@ -41,6 +41,7 @@ public class AudioManager : MonoBehaviour
                     musicQueue.Clear();
                 }
                 musicSource.Play();
+                
 
             }
         }

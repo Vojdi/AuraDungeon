@@ -48,7 +48,7 @@ public class RangedEnemyAI : EnemyAI
             }
             agent.speed = es.MovementSpeed;
             agent.autoBraking = false;
-            if (es.AuraToughness >= PlayerStats.Instance.Aura)
+            if (es.AuraToughness > PlayerStats.Instance.Aura)
             {//Enemy Followuje Hrace
                 AttackState(enemyPlayerDistance);
             }

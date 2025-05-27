@@ -35,9 +35,9 @@ public class PlayerStats : MonoBehaviour
    
     private static (int maxHp, int damage, float range, float moveSpeed, float reload, float projSpeed)[] statPresets =
     {
-        (100, 14, 17f, 7.5f, 1.2f, 20f),   
-        (65, 11, 14f, 9.5f, 0.6f, 35f),  
-        (140, 20, 25f, 5.5f, 1.7f, 15f)   
+        (85, 14, 17f, 7f, 1.2f, 20f),   
+        (65, 9, 14f, 9.5f, 0.5f, 35f),  
+        (115, 30, 25f, 5.5f, 2f, 15f)   
     };
 
     void Awake()
@@ -93,7 +93,7 @@ public class PlayerStats : MonoBehaviour
 
     public void AddAura()
     {
-        if (aura < 10)
+        if (aura < 5)
             aura++;
     }
 

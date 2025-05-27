@@ -15,6 +15,8 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] Toggle immortalityCheckBox;
     [SerializeField] TMPro.TMP_Text beginButtonText;
+    [SerializeField] Button beginButton;
+    
     [SerializeField] Button[] buttons;
 
     [SerializeField] GameObject shopGj;
@@ -118,6 +120,8 @@ public class MainMenu : MonoBehaviour
        
         chosen = false;
         beginButtonText.text = "Choose your Character first!";
+        beginButton.interactable = false;
+        
         if(PlayerPrefs.GetString("Thief") != "true")
         {
             buttons[1].interactable = false;
@@ -139,12 +143,12 @@ public class MainMenu : MonoBehaviour
         if(PlayerPrefs.GetString("ImmortalityOwned") != "true")
         {
             checkBoxText.text = "Locked";
-            immortalityCheckBox.interactable = false;
+            immortalityCheckBox.gameObject.SetActive(false);
         }
         else
         {
             checkBoxText.text = "immortality";
-            immortalityCheckBox.interactable = true;
+            immortalityCheckBox.gameObject.SetActive(true);
         }
     }
 
@@ -158,7 +162,7 @@ public class MainMenu : MonoBehaviour
 
     public void ChooseButtonClicked(int buttonId)
     {
-        // Clear all selection text labels
+        beginButton.interactable = true;
         for (int i = 0; i < texts.Length; i++)
         {
             if(texts[i].text != "Locked")

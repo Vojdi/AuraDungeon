@@ -31,7 +31,10 @@ public class PlayerHp : Hp
     {
         if (!immortal)
         {
-            PlayerStats.Instance.MinusAura();
+            if(Dmg > 0)
+            {
+                PlayerStats.Instance.MinusAura();
+            }
             base.DoDmg(Dmg);
         }
     }
