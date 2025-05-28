@@ -37,7 +37,7 @@ public class MainMenu : MonoBehaviour
     Color selectedColor = new Color32(0xF5, 0xF5, 0xF5, 0xFF);   // #F5F5F5
     Color deselectedColor = new Color32(0x6B, 0x6A, 0x6A, 0xFF); // #6B6A6A
     private void Awake()
-    {
+    {  
         Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
         Application.targetFrameRate = 60;
         QualitySettings.vSyncCount = 1;

@@ -8,6 +8,7 @@ public class GameOverScreen : MonoBehaviour
     [SerializeField] GameObject mainPanel;
     [SerializeField] TMPro.TMP_Text roomCountPanel;
     [SerializeField] TMPro.TMP_Text auronCountPanel;
+    [SerializeField] GameObject newHighScore;
     private static GameOverScreen instance;
     public static GameOverScreen Instance => instance;
 
@@ -31,6 +32,11 @@ public class GameOverScreen : MonoBehaviour
         if(roomCount + 1 > PlayerPrefs.GetInt("MostRooms"))
         {
             PlayerPrefs.SetInt("MostRooms", roomCount + 1);
+            newHighScore.SetActive(true);
+        }
+        else
+        {
+            newHighScore.SetActive(false);
         }
         mainPanel.SetActive(true);
         roomCountPanel.text = $"You have successfully survived {roomCount.ToString()} rooms";
