@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
             Vector3 spawnPosition = currentRoom.transform.position + roomCornerValues[currentRoomCornerIndex];
             spawnPosition.y = 1;
             var en = Instantiate(currentRoomEnemiesToSpawn[i].gameObject, spawnPosition, Quaternion.identity);
-            Instantiate(spawnParticle, new Vector3(spawnPosition.x,spawnPosition.y + 1, spawnPosition.z), Quaternion.identity, en.transform);
+            Instantiate(spawnParticle, new Vector3(spawnPosition.x,spawnPosition.y + 2, spawnPosition.z), Quaternion.identity, en.transform);
 
             currentSpawnedEnemies.Add(en);
             currentRoomCornerIndex++;

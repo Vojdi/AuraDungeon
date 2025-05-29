@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endProjectileTransform: {fileID: 9051364884940337697}
+  projectileDissapearParticle: {fileID: 4519720491190478925, guid: 44458d12697977343bd8dfb1102f36be,
+    type: 3}
   spawner: {fileID: 0}
 --- !u!65 &2466741411569368613
 BoxCollider:

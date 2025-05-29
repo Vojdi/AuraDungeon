@@ -4,6 +4,7 @@ using UnityEngine.Rendering;
 public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField] Transform endProjectileTransform;
+    [SerializeField] GameObject projectileDissapearParticle;
     Vector3 direction;
     Vector3 startSpawnerPos;
     float distanceTravelled;
@@ -45,6 +46,7 @@ public class EnemyProjectile : MonoBehaviour
         if (distanceTravelled >= projectileRange)
         {
             AddToPool();
+            Instantiate(projectileDissapearParticle, endProjectileTransform.position, Quaternion.identity);
         }
     }
     private void OnTriggerEnter(Collider other)

@@ -8,14 +8,14 @@ public class SkeletonEliteAI : MonoBehaviour
     protected AnimationStateController asc;
     protected NavMeshAgent agent;
 
-    
-    private float minReach = 7f;    
-    private float maxReach = 15f;   
+
+    private float minReach;
+    private float maxReach;   
     private bool isInMeleeRange;
 
    
     private float moveCooldownTimer = 0f;
-    private float moveCooldownDuration = 0.3f;
+    private float moveCooldownDuration = 0.2f;
 
     public static int AttackType { get; private set; }
     public bool IsWalking => agent.velocity.magnitude > 0.1f;
@@ -31,7 +31,7 @@ public class SkeletonEliteAI : MonoBehaviour
        
         if (es != null)
         {
-            minReach = 4.5f;
+            minReach = 5;
             maxReach = es.Reach;
         }
     }

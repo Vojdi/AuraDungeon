@@ -29,10 +29,17 @@ public class GameOverScreen : MonoBehaviour
         foreach (var u in unnecessary) {
             u.SetActive(false); 
         }
-        if(roomCount + 1 > PlayerPrefs.GetInt("MostRooms"))
+        if (PlayerPrefs.GetString("Immortality") != "true")
         {
-            PlayerPrefs.SetInt("MostRooms", roomCount + 1);
-            newHighScore.SetActive(true);
+            if (roomCount + 1 > PlayerPrefs.GetInt("MostRooms"))
+            {
+                PlayerPrefs.SetInt("MostRooms", roomCount + 1);
+                newHighScore.SetActive(true);
+            }
+            else
+            {
+                newHighScore.SetActive(false);
+            }
         }
         else
         {

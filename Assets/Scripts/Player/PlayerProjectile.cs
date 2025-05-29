@@ -2,6 +2,7 @@ using UnityEngine;
 public class PlayerProjectile : MonoBehaviour
 {
     [SerializeField] Transform endProjectileTransform;
+    [SerializeField] GameObject projectileDissapearParticle;
     
     Vector3 direction;
     Vector3 startPlayerPos;
@@ -34,6 +35,7 @@ public class PlayerProjectile : MonoBehaviour
         if (distanceTravelled >= PlayerStats.Instance.Range)
         {
             AddToPool();
+            Instantiate(projectileDissapearParticle,endProjectileTransform.position, Quaternion.identity);
         }
     }
     private void OnTriggerEnter(Collider other)

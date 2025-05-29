@@ -35,7 +35,7 @@ public class PlayerStats : MonoBehaviour
    
     private static (int maxHp, int damage, float range, float moveSpeed, float reload, float projSpeed)[] statPresets =
     {
-        (85, 14, 17f, 7f, 1.2f, 20f),   
+        (85, 14, 17f, 7f, 1.1f, 20f),   
         (65, 9, 14f, 9.5f, 0.5f, 35f),  
         (115, 30, 25f, 5.5f, 2f, 15f)   
     };
