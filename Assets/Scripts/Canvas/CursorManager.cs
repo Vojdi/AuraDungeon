@@ -7,6 +7,6 @@ public class CursorManager : MonoBehaviour
 
     void Start()
     {
-        Cursor.SetCursor(customCursor, hotspot, CursorMode.Auto);
+        Cursor.SetCursor(customCursor, new Vector2(customCursor.width / 2, customCursor.height / 2), CursorMode.Auto);
     }
 }

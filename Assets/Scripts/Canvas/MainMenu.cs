@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,7 +8,6 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject mainMenuGj;
-    [SerializeField] GameObject mainMenuOtherGraphicsGj;
 
     [SerializeField] GameObject characterSelectionScreenGj;
     [SerializeField] TMPro.TMP_Text[] texts;
@@ -24,6 +24,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] TMPro.TMP_Text[] shopButtons;
     [SerializeField] GameObject[] miscStuff;
     [SerializeField] TMPro.TMP_Text mostRoomsText;
+
+    [SerializeField] GameObject howToPlayGj;
+    [SerializeField] GameObject[] howToPlaySlides;
+    int currentSlideIndex;
 
     string lettersPressed = "";
     string lettersNeeded = "skibidi";
@@ -45,6 +49,7 @@ public class MainMenu : MonoBehaviour
 
         int mostRoomsCount = PlayerPrefs.GetInt("MostRooms");
         mostRoomsText.text = $"Highest room: {mostRoomsCount}";
+        currentSlideIndex = 0;
     }
 
     void Update()
@@ -111,7 +116,6 @@ public class MainMenu : MonoBehaviour
         }
 
         mainMenuGj.SetActive(false);
-        mainMenuOtherGraphicsGj.SetActive(false);
         characterSelectionScreenGj.SetActive(true);
         foreach (var button in texts)
         {
@@ -155,11 +159,54 @@ public class MainMenu : MonoBehaviour
     public void ReturnToMainMenu()
     {
         mainMenuGj.SetActive(true);
-        mainMenuOtherGraphicsGj.SetActive(true);
         characterSelectionScreenGj.SetActive(false);
+        howToPlayGj.SetActive(false);
         shopGj.SetActive(false);
     }
+    public void GoToHowToPlay()
+    {
+        howToPlayGj.SetActive(true);
+        mainMenuGj.SetActive(false);
+        currentSlideIndex = 0;
+        foreach (var slide in howToPlaySlides)
+        {
+            slide.SetActive(false);
+        }
+        howToPlaySlides[currentSlideIndex].SetActive(true);
+    }
+    public void HowToPlayLeft()
+    {
+        if (currentSlideIndex == 0)
+        {
+            currentSlideIndex = howToPlaySlides.Length - 1;
+        }
+        else
+        {
+            currentSlideIndex--;
+        }
+        foreach (var slide in howToPlaySlides)
+        {
+            slide.SetActive(false);
+        }
+        howToPlaySlides[currentSlideIndex].SetActive(true);
+    }
+    public void HowToPlayRight()
+    {
+        if (currentSlideIndex == howToPlaySlides.Length - 1) 
+        {
+            currentSlideIndex = 0;
 
+        }
+        else 
+        {
+            currentSlideIndex++;
+        }
+        foreach (var slide in howToPlaySlides)
+        {
+            slide.SetActive(false);
+        }
+        howToPlaySlides[currentSlideIndex].SetActive(true);
+    }
     public void ChooseButtonClicked(int buttonId)
     {
         beginButton.interactable = true;
@@ -187,9 +234,7 @@ public class MainMenu : MonoBehaviour
     }
     public void GoToShop()
     {
-        
         mainMenuGj.SetActive(false);
-        mainMenuOtherGraphicsGj.SetActive(false);
         shopGj.SetActive(true);
         money = PlayerPrefs.GetInt("Money");
         auronsText.text = money.ToString();

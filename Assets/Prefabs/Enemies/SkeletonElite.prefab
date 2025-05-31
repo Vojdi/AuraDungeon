@@ -446,7 +446,7 @@ MonoBehaviour:
   sightRange: 1000
   movementSpeed: 7
   reloadTime: 2
-  reach: 8
+  reach: 10
   damage: 25
   dangerValue: 10
   projectileSpeed: 35

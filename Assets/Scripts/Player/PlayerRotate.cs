@@ -30,6 +30,9 @@ public class PlayerRotate : MonoBehaviour
             transform.LookAt(visualMousePos);
             ShowRange(visualMousePos);
         }
+        if (Input.GetMouseButtonDown(1)) {
+            lineRenderer.enabled = !lineRenderer.enabled;
+        }
     }
 
     void ShowRange(Vector3 visualMousePos)
