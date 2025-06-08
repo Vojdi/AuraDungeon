@@ -24,6 +24,7 @@ public class EnemyProjectile : MonoBehaviour
     public void Cast()
     {
         direction = (PlayerMovement.PlayerPosition - spawner.transform.position).normalized;
+        transform.rotation = Quaternion.LookRotation(direction);
         startSpawnerPos = spawner.transform.position;
         distanceTravelled = 0f;
         readyToTravel = true;

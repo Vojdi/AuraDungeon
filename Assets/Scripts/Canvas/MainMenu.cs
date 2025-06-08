@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] GameObject characterSelectionScreenGj;
     [SerializeField] TMPro.TMP_Text[] texts;
-    [SerializeField] TMPro.TMP_Text checkBoxText;
+    [SerializeField] GameObject checkBoxText;
 
     [SerializeField] Toggle immortalityCheckBox;
     [SerializeField] TMPro.TMP_Text beginButtonText;
@@ -31,8 +31,6 @@ public class MainMenu : MonoBehaviour
 
     string lettersPressed = "";
     string lettersNeeded = "skibidi";
-    
-
 
     int money;
     bool chosen = false;
@@ -146,12 +144,12 @@ public class MainMenu : MonoBehaviour
         }
         if(PlayerPrefs.GetString("ImmortalityOwned") != "true")
         {
-            checkBoxText.text = "Locked";
+            checkBoxText.SetActive(false);
             immortalityCheckBox.gameObject.SetActive(false);
         }
         else
         {
-            checkBoxText.text = "immortality";
+            checkBoxText.SetActive(true);
             immortalityCheckBox.gameObject.SetActive(true);
         }
     }
